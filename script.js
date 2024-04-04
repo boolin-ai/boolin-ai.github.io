@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const liffId = 'YOUR_LIFF_ID_HERE'; // ここにあなたのLIFF IDをセットしてください。
+    const liffId = '2000050276-Kjj7lW0L'; // ここにあなたのLIFF IDをセットしてください。
     
     // LIFF SDKの初期化
     liff.init({ liffId })
