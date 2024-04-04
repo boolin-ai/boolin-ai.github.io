@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIFF Form Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>予約フォーム</h1>
+        <form id="submitForm">
+            <div class="form-group">
+                <p>メニュー選択:</p>
+                <input type="radio" id="menu1" name="q1" value="メニュー1">
+                <label for="menu1">メニュー1</label><br>
+                <input type="radio" id="menu2" name="q1" value="メニュー2">
+                <label for="menu2">メニュー2</label><br>
+                <input type="radio" id="menu3" name="q1" value="メニュー3">
+                <label for="menu3">メニュー3</label>
+            </div>
+            <div class="form-group">
+                <label for="name">名前:</label>
+                <input type="text" id="name" name="q2" required>
+            </div>
+            <div class="form-group">
+                <label for="email">メール:</label>
+                <input type="text" id="email" name="q3" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">電話:</label>
+                <input type="text" id="phone" name="q4" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">生年月日:</label>
+                <input type="text" id="dob" name="q5" placeholder="YYYY/MM/DD" required>
+            </div>
+            <div class="form-group">
+                <p>性別:</p>
+                <input type="radio" id="genderMale" name="q6" value="男性">
+                <label for="genderMale">男性</label><br>
+                <input type="radio" id="genderFemale" name="q6" value="女性">
+                <label for="genderFemale">女性</label><br>
+                <input type="radio" id="genderOther" name="q6" value="その他">
+                <label for="genderOther">その他</label>
+            </div>
+            <div class="form-group">
+                <label for="datetime">日時候補:</label>
+                <input type="text" id="datetime" name="q7" placeholder="YYYY/MM/DD hh:mm" required>
+            </div>
+            <button type="submit">送信</button>
+        </form>
+        
+    </div>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
