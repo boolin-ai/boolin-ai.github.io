@@ -2,15 +2,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const liffId = '2000050276-Kjj7lW0L'; // ここにあなたのLIFF IDをセットしてください。
     
     // LIFF SDKの初期化
-    liff.init({ liffId })
-        .then(() => {
-            if (!liff.isLoggedIn()) {
-                console.log("ユーザーは既にLINEにログインしています");
-            }
-        })
-        .catch(err => {
-            console.error('LIFF Initialization failed', err);
-        });
+    liff.init({
+        liffId: liffId 
+    }).then(() => {
+        if (!liff.isLoggedIn()) {
+            console.log("ユーザーは既にLINEにログインしています");
+        }
+    }).catch(err => {
+        console.error('LINEログイン失敗', err);
+    });
 
     // フォーム送信の処理
     document.getElementById('submitForm').addEventListener('submit', function(event) {
