@@ -1,22 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const liffId = '2000050276-Kjj7lW0L'; // ここにあなたのLIFF IDをセットしてください。
-    
-    // LIFF SDKの初期化
+    // LIFF IDを設定してLIFF SDKを初期化
+    const liffId = '2000050276-Kjj7lW0L';
     liff.init({
         liffId: liffId 
-    }).then(() => {
-        if (!liff.isLoggedIn()) {
-            console.log("ユーザーは既にLINEにログインしています");
-        }
-    }).catch(err => {
+    })
+    .then(() => {
+        // 初期化が成功したら何か処理を行う（今回は特になし）
+    })
+    .catch(err => {
+        // 初期化が失敗した場合のエラーハンドリング
         console.error('LINEログイン失敗', err);
     });
 
-    // フォーム送信の処理
+    // フォーム送信のイベントリスナー設定
     document.getElementById('submitForm').addEventListener('submit', function(event) {
         event.preventDefault(); // デフォルトの送信を防止
 
-        // ユーザープロファイルの取得
+        // ユーザープロファイルを取得して、フォームデータを処理
         liff.getProfile().then(profile => {
             const userName = profile.displayName;
             const userId = profile.userId;
@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 q7: document.getElementById('datetime').value,
             };
 
+            // 予約確認メッセージの組み立て
             const msg = `以下の内容で仮予約を受け付けました。\n
                 メニュー選択: ${formData.q1}\n
                 名前: ${formData.q2}\n
@@ -45,15 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // LINEトークにメッセージを送信
             liff.sendMessages([{
-                'type': 'text',
-                'text': msg
-            }]).then(() => {
+                type: 'text',
+                text: msg
+            }])
+            .then(() => {
                 console.log('Message sent');
-            }).catch(err => {
+            })
+            .catch(err => {
                 console.error('Send Message failed', err);
             });
 
-            // ここにGASへのPOSTリクエストを追加
+            // GASへのPOSTリクエストを送信
             fetch('https://script.google.com/macros/s/AKfycbzw2rBkbo4q3sVhb6kZqHVLhNacbCSSjcQvCowow1zbwkcrLkrIifMVbT5Xzek31dLN/exec', {
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -62,13 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
-
-            liff.closeWindow(); // メッセージ送信後、LIFFアプリを閉じる
-        }).catch(err => {
+            .then(data => {
+                console.log(data);
+                // データ送信が成功したらLIFFアプリを閉じる
+                liff.closeWindow();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        })
+        .catch(err => {
             console.error('Failed to get user profile', err);
         });
     });
 });
-
