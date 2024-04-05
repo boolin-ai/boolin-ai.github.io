@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
         liffId: liffId
     })
     .then(() => {
+        // IDトークンの取得
+        idToken = liff.isLoggedIn() ? liff.getIDToken() : null;
     })
     .catch(err => {
         console.error('LINEログイン失敗', err);
@@ -16,8 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('submitForm').addEventListener('submit', function(event) {
     event.preventDefault(); // デフォルトの送信を防止
 
-    // IDトークンの取得
-    const idToken = liff.isLoggedIn() ? liff.getIDToken() : null;
+    if (!idToken) {
+        console.error('ID Token is not available');
+        return;
+    }
 
     // フォームからのデータを集める
     const formData = {
@@ -66,9 +70,7 @@ function sendIdTokenAndFormDataToServer(idToken, formData) {
         },
         body: JSON.stringify({ idToken: idToken, formData: formData })
     })
-    // .then(response => response.json())
-    .then(data => {
-        console.log('サーバーからのレスポンス:', data);
+    .then(() => {
         liff.closeWindow(); // 応答後にLIFFアプリを閉じる
     })
     .catch(error => {
