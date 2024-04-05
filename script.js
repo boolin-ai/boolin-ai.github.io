@@ -66,7 +66,7 @@ function sendIdTokenAndFormDataToServer(idToken, formData) {
         },
         body: JSON.stringify({ idToken: idToken, formData: formData })
     })
-    .then(response => response.json())
+    // .then(response => response.json())
     .then(data => {
         console.log('サーバーからのレスポンス:', data);
         liff.closeWindow(); // 応答後にLIFFアプリを閉じる
