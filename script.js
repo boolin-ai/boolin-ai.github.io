@@ -64,7 +64,6 @@ document.getElementById('submitForm').addEventListener('submit', function(event)
 function sendIdTokenAndFormDataToServer(idToken, formData) {
     fetch('https://script.google.com/macros/s/AKfycbzw2rBkbo4q3sVhb6kZqHVLhNacbCSSjcQvCowow1zbwkcrLkrIifMVbT5Xzek31dLN/exec', {
         method: 'POST',
-        mode: 'no-cors', // CORSポリシーを無視
         headers: {
             'Content-Type': 'application/json'
         },
