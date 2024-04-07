@@ -1,17 +1,29 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const liffId = '2000050276-Kjj7lW0L'; // ここにあなたのLIFF IDをセットしてください。
+// LIFF SDKの初期化
+async function initializeLiff() {
+    const liffId = '2000050276-Kjj7lW0L'; // あなたのLIFF IDに置き換えてください
+    try {
+        await liff.init({ liffId: liffId });
+        if (liff.isLoggedIn()) {
+            // ユーザープロファイルの取得
+            const profile = await liff.getProfile();
+            const userId = profile.userId; // ユーザーID
+            const userName = profile.displayName; // ユーザー名
 
-    // LIFF SDKの初期化
-    liff.init({
-        liffId: liffId
-    })
-    .then(() => {
-        // IDトークンの取得
-        idToken = liff.isLoggedIn() ? liff.getIDToken() : null;
-    })
-    .catch(err => {
-        console.error('LINEログイン失敗', err);
-    });
+            // フォームの隠しフィールドにユーザーIDとユーザー名をセット
+            document.getElementById('userId').value = userId;
+            document.getElementById('userName').value = userName;
+        } else {
+            // ユーザーがログインしていない場合はログインを促す
+            liff.login();
+        }
+    } catch (error) {
+        console.error('LIFF Initialization failed', error);
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializeLiff();
 });
 
 // フォーム送信のイベントリスナー設定
