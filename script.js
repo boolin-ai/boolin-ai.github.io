@@ -8,8 +8,6 @@ async function initializeLiff() {
             // フォームの隠しフィールドにユーザーIDとユーザー名をセット
             document.getElementById('userId').value = profile.userId;
             document.getElementById('userName').value = profile.displayName;
-        } else {
-            liff.login(); // ユーザーがログインしていない場合はログインを促す
         }
     } catch (error) {
         console.error('LIFF Initialization failed', error);
@@ -21,8 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // フォーム送信のイベントリスナー設定
-document.getElementById('submitForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); // デフォルトの送信を防止
+document.getElementById('submitForm').addEventListener('submit', async function() {
 
     // フォームからのデータを集める
     const formData = {
@@ -47,8 +44,8 @@ document.getElementById('submitForm').addEventListener('submit', async function(
             text: msg
         }]);
         console.log('Message sent');
-        liff.closeWindow(); // メッセージ送信後にLIFFアプリを閉じる
     } catch (err) {
         console.error('Send Message failed', err);
     }
+    liff.closeWindow(); // 送信成功時だけでなく、失敗時にもLIFFアプリを閉じます
 });
