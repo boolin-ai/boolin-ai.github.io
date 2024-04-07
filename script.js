@@ -1,25 +1,31 @@
-// LIFF SDKの初期化とユーザープロファイルの取得
-async function initializeLiff() {
-    const liffId = '2000050276-Kjj7lW0L'; // あなたのLIFF IDに置き換えてください
-    try {
-        await liff.init({ liffId: liffId });
-        if (liff.isLoggedIn()) {
-            const profile = await liff.getProfile();
-            // フォームの隠しフィールドにユーザーIDとユーザー名をセット
-            document.getElementById('userId').value = profile.userId;
-            document.getElementById('userName').value = profile.displayName;
-        }
-    } catch (error) {
-        console.error('LIFF Initialization failed', error);
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-    initializeLiff(); // ページ読み込み時にLIFFを初期化
+    const liffId = '2000050276-Kjj7lW0L'; // あなたのLIFF IDに置き換えてください
+    initializeLiff(liffId);
+
+    function initializeLiff(liffId) {
+        liff.init({
+            liffId: liffId
+        }).then(() => {
+            if (liff.isLoggedIn()) { // ユーザーがログインしているか確認
+                liff.getProfile().then(profile => {
+                    // フォームの隠しフィールドにユーザーIDとユーザー名をセット
+                    document.getElementById('userId').value = profile.userId;
+                    document.getElementById('userName').value = profile.displayName;
+                }).catch((err) => {
+                    console.log('Error getting profile: ', err);
+                });
+            } else {
+                liff.login(); // ユーザーがログインしていない場合はログインプロセスを開始
+            }
+        }).catch((err) => {
+            console.log('LIFF Initialization failed ', err);
+        });
+    }         
 });
 
+
 // フォーム送信のイベントリスナー設定
-document.getElementById('submitForm').addEventListener('submit', async function() {
+document.getElementById('submitForm').addEventListener('submit', function() {
 
     // フォームからのデータを集める
     const formData = {
@@ -35,15 +41,17 @@ document.getElementById('submitForm').addEventListener('submit', async function(
     // 予約確認メッセージの組み立て
     const msg = `以下の内容で仮予約を受け付けました。\nメニュー選択: ${formData.q1}\n名前: ${formData.q2}\nメール: ${formData.q3}\n電話: ${formData.q4}\n生年月日: ${formData.q5}\n性別: ${formData.q6}\n日時候補: ${formData.q7}`;
 
-    // LINEトークにメッセージを送信
-    try {
-        await liff.sendMessages([{
-            type: 'text',
-            text: msg
-        }]);
-        console.log('Message sent');
-    } catch (err) {
-        console.error('Send Message failed', err);
+    sendText(msg);
+    
+    function sendText(text) {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': text
+        }]).then(function () {
+            liff.closeWindow();
+        }).catch(function (error) {
+            window.alert('Failed to send message ' + error);
+        });
     }
-    await liff.closeWindow(); // 送信成功時だけでなく、失敗時にもLIFFアプリを閉じます
+
 });
