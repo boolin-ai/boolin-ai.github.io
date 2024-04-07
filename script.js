@@ -1,34 +1,33 @@
-// LIFF SDKの初期化
+// LIFF SDKの初期化とユーザープロファイルの取得
 async function initializeLiff() {
     const liffId = '2000050276-Kjj7lW0L'; // あなたのLIFF IDに置き換えてください
     try {
         await liff.init({ liffId: liffId });
         if (liff.isLoggedIn()) {
-            // ユーザープロファイルの取得
             const profile = await liff.getProfile();
-            const userId = profile.userId; // ユーザーID
-            const userName = profile.displayName; // ユーザー名
-
             // フォームの隠しフィールドにユーザーIDとユーザー名をセット
-            document.getElementById('userId').value = userId;
-            document.getElementById('userName').value = userName;
+            document.getElementById('userId').value = profile.userId;
+            document.getElementById('userName').value = profile.displayName;
         } else {
-            // ユーザーがログインしていない場合はログインを促す
-            liff.login();
+            liff.login(); // ユーザーがログインしていない場合はログインを促す
         }
     } catch (error) {
         console.error('LIFF Initialization failed', error);
     }
 }
 
-// フォーム送信のイベントリスナー設定
-document.getElementById('submitForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // デフォルトの送信を防止
+document.addEventListener('DOMContentLoaded', function() {
+    initializeLiff(); // ページ読み込み時にLIFFを初期化
+});
 
-    initializeLiff();
+// フォーム送信のイベントリスナー設定
+document.getElementById('submitForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // デフォルトの送信を防止
 
     // フォームからのデータを集める
     const formData = {
+        userId: document.getElementById('userId').value,
+        userName: document.getElementById('userName').value,
         q1: document.querySelector('input[name="q1"]:checked').value,
         q2: document.getElementById('name').value,
         q3: document.getElementById('email').value,
@@ -39,26 +38,17 @@ document.getElementById('submitForm').addEventListener('submit', function(event)
     };
 
     // 予約確認メッセージの組み立て
-    const msg = `以下の内容で仮予約を受け付けました。\n
-        メニュー選択: ${formData.q1}\n
-        名前: ${formData.q2}\n
-        メール: ${formData.q3}\n
-        電話: ${formData.q4}\n
-        生年月日: ${formData.q5}\n
-        性別: ${formData.q6}\n
-        日時候補: ${formData.q7}`;
+    const msg = `以下の内容で仮予約を受け付けました。\nメニュー選択: ${formData.q1}\n名前: ${formData.q2}\nメール: ${formData.q3}\n電話: ${formData.q4}\n生年月日: ${formData.q5}\n性別: ${formData.q6}\n日時候補: ${formData.q7}`;
 
     // LINEトークにメッセージを送信
-    liff.sendMessages([{
-        type: 'text',
-        text: msg
-    }])
-    .then(() => {
+    try {
+        await liff.sendMessages([{
+            type: 'text',
+            text: msg
+        }]);
         console.log('Message sent');
-        liff.closeWindow(); // 応答後にLIFFアプリを閉じる
-    })
-    .catch(err => {
+        liff.closeWindow(); // メッセージ送信後にLIFFアプリを閉じる
+    } catch (err) {
         console.error('Send Message failed', err);
-    });
+    }
 });
-
