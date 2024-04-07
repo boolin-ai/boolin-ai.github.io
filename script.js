@@ -23,8 +23,6 @@ document.getElementById('submitForm').addEventListener('submit', async function(
 
     // フォームからのデータを集める
     const formData = {
-        userId: document.getElementById('userId').value,
-        userName: document.getElementById('userName').value,
         q1: document.querySelector('input[name="q1"]:checked').value,
         q2: document.getElementById('name').value,
         q3: document.getElementById('email').value,
@@ -47,5 +45,5 @@ document.getElementById('submitForm').addEventListener('submit', async function(
     } catch (err) {
         console.error('Send Message failed', err);
     }
-    liff.closeWindow(); // 送信成功時だけでなく、失敗時にもLIFFアプリを閉じます
+    await liff.closeWindow(); // 送信成功時だけでなく、失敗時にもLIFFアプリを閉じます
 });
