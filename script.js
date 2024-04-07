@@ -21,19 +21,11 @@ async function initializeLiff() {
     }
 }
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    initializeLiff();
-});
-
 // フォーム送信のイベントリスナー設定
 document.getElementById('submitForm').addEventListener('submit', function(event) {
     event.preventDefault(); // デフォルトの送信を防止
 
-    if (!idToken) {
-        console.error('ID Token is not available');
-        return;
-    }
+    initializeLiff();
 
     // フォームからのデータを集める
     const formData = {
@@ -45,9 +37,6 @@ document.getElementById('submitForm').addEventListener('submit', function(event)
         q6: document.querySelector('input[name="q6"]:checked').value,
         q7: document.getElementById('datetime').value,
     };
-
-    // ここでサーバーへIDトークンとformDataを送信
-    sendIdTokenAndFormDataToServer(idToken, formData);
 
     // 予約確認メッセージの組み立て
     const msg = `以下の内容で仮予約を受け付けました。\n
@@ -66,26 +55,10 @@ document.getElementById('submitForm').addEventListener('submit', function(event)
     }])
     .then(() => {
         console.log('Message sent');
+        liff.closeWindow(); // 応答後にLIFFアプリを閉じる
     })
     .catch(err => {
         console.error('Send Message failed', err);
     });
 });
-
-// IDトークンとフォームデータをサーバーに送信する関数
-function sendIdTokenAndFormDataToServer(idToken, formData) {
-    fetch('https://script.google.com/macros/s/AKfycbzw2rBkbo4q3sVhb6kZqHVLhNacbCSSjcQvCowow1zbwkcrLkrIifMVbT5Xzek31dLN/exec', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ idToken: idToken, formData: formData })
-    })
-    .then(() => {
-        liff.closeWindow(); // 応答後にLIFFアプリを閉じる
-    })
-    .catch(error => {
-        console.error('サーバーでのエラー:', error);
-    });
-}
 
