@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ完了ページ</title>
+</head>
+<body>
+    <div class="">
+        <p>仮予約を受け付けました。</p>
+        <!-- ここでbuttonのtypeを"button"に変更しました -->
+        <button type="button" class="btn" id="closeButton">閉じる</button>
+    </div>
+    <script src="https://static.line-scdn.net/liff/edge/versions/2/sdk.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const liffId = "2000050276-Kjj7lW0L"; // ここにLIFF IDを設定
+            initializeLiff(liffId);
+        });
+    
+        function initializeLiff(liffId) {
+            liff.init({
+                liffId: liffId
+            }).then(() => {
+                // 初期化成功後にボタンのイベントリスナーを設定
+                setupCloseButton();
+            }).catch((err) => {
+                console.error('LIFF Initialization failed', err);
+            });
+        }
+
+        function setupCloseButton() {
+            // "閉じる"ボタンにイベントリスナーを追加
+            document.getElementById('closeButton').addEventListener('click', function() {
+                if (liff.isInClient()) {
+                    liff.closeWindow(); // LIFFがLINE内で開かれている場合は、LIFFアプリを閉じる
+                } else {
+                    window.close(); // LIFFがブラウザで開かれている場合は、タブを閉じる
+                }
+            });
+        }
+    </script>
+</body>
+</html>

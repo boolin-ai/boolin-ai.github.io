@@ -11,8 +11,7 @@
             <br>診療時間 10：00-19：30　<a href="tel:0120-4874-25">TEL 0120-4874-25</a>
             <br>未成年者の方がカウンセリング・施術を受ける際は<a href="https://wbc.or.jp/images/guide/consent.pdf">未成年者同意書</a>をご記入の上、ご来院時にお持ち下さい。
         </p>
-        <form id="reserveForm" class="reserveForm">
-            <input type="hidden" name="action" value="liffs_form_action">
+        <form action="https://script.google.com/macros/s/AKfycbxIwKCry_Dm5ZOQefIA4-rdwSW0ivm6sVuSjzOtJfehYeBynI4XoykThyk3ycUG1PQ9_g/exec" method="post">
             <div class="form-item">
                 <div class="form-q">
                     <label>診療を選択してください</label>
@@ -79,10 +78,9 @@
             </div>
         </form>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script>
-        $(document).ready(function () {
+        document.addEventListener('DOMContentLoaded', function () {
             const liffId = "2000050276-Kjj7lW0L"; // ここにLIFF IDを設定
             initializeLiff(liffId);
         });
@@ -91,77 +89,32 @@
             liff.init({
                 liffId: liffId
             }).then(() => {
-                initializeApp();
-            }).catch((err) => {
-                console.log('LIFF Initialization failed ', err);
-            });
-        }
-
-        function initializeApp() {
-            if (liff.isLoggedIn()) {
-                liff.getProfile().then(profile => {
-                    const userId = profile.userId;
-                    const displayName = profile.displayName;
-                    // フォームに隠しフィールドを追加
-                    $('<input>').attr({
-                        type: 'hidden',
-                        id: 'userId',
-                        name: 'userId',
-                        value: userId
-                    }).appendTo('form');
-                    
-                    $('<input>').attr({
-                        type: 'hidden',
-                        id: 'displayName',
-                        name: 'displayName',
-                        value: displayName
-                    }).appendTo('form');
-                }).catch(err => console.error(err));
-            } else {
-                console.log("User is not logged in.");
-            }
-        }
-    
-        $(function () {
-            $('form').submit(function (event) {
-                event.preventDefault(); // フォームのデフォルト送信を防ぐ
-                
-                // フォームデータの取得とURLエンコード
-                let formData = new URLSearchParams({
-                    userId: $('#userId').val(), // LIFFから追加された隠しフィールドから値を取得
-                    displayName: $('#displayName').val(), // LIFFから追加された隠しフィールドから値を取得
-                    menu: $('input[name="menu"]:checked').val(),
-                    name: $('#name').val(),
-                    furigana: $('#furigana').val(),
-                    email: $('#email').val(),
-                    phone: $('#phone').val(),
-                    birthday: $('#birthday').val(),
-                    gender: $('input[name="gender"]:checked').val()
-                }).toString();
-    
-                postToSpreadsheet(formData);
-            });
-        });
-    
-        // スプレッドシートにデータを送信する関数
-        function postToSpreadsheet(formData) {
-            const URL = "https://script.google.com/macros/s/AKfycbxIwKCry_Dm5ZOQefIA4-rdwSW0ivm6sVuSjzOtJfehYeBynI4XoykThyk3ycUG1PQ9_g/exec";
-            
-            fetch(URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: formData
-            }).then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                if (liff.isLoggedIn()) {
+                    initializeApp();
+                } else {
+                    liff.login(); // ユーザーがログインしていない場合はログインを促す
                 }
-                alert('送信が完了しました。'); // ユーザーに送信完了を知らせる
-                liff.closeWindow();
-            }).catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
+            }).catch((err) => {
+                console.error('LIFF Initialization failed', err);
             });
+        }
+    
+        function initializeApp() {
+            liff.getProfile().then(profile => {
+                const userId = profile.userId;
+                const displayName = profile.displayName;
+                // フォームに隠しフィールドを追加
+                addHiddenInput('userId', userId);
+                addHiddenInput('displayName', displayName);
+            }).catch(err => console.error(err));
+        }
+    
+        function addHiddenInput(name, value) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = value;
+            document.querySelector('form').appendChild(input);
         }
     </script>
 </body>
