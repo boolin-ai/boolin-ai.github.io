@@ -4,5 +4,51 @@
     box-sizing: border-box;
 }
 body {
-    background: #f6f6f6;
+    background: #FFF;
+}
+header {
+    background: #BA9D5A;
+    padding: 10px;
+}
+h1 {
+    color: #fff;
+    font-size: 14px;
+}
+h2 {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 15px;
+    padding: 20px 0 10px 0;
+    border-bottom: #BA9D5A solid 1.8px;
+}
+main {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.dis {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+.dis p{
+    font-size: 12px;
+}
+.formStart {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    background: #BA9D5A;
+    color: #FFF;
+    border: 0px;
+    padding: 8px 20px;
+    border-radius: 30px;
+}
+.policy {
+    padding-top: 30px;
+    font-size: 12px;
+    color: #BA9D5A;
+    text-align: center;
 }

@@ -7,78 +7,30 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div class="form">
-        <p>当日はカウンセリングのみのご予約となります。当日に施術をご希望の場合はお電話でお問合せください。
-            <br>診療時間 10：00-19：30　<a href="tel:0120-4874-25">TEL 0120-4874-25</a>
-            <br>未成年者の方がカウンセリング・施術を受ける際は<a href="https://wbc.or.jp/images/guide/consent.pdf">未成年者同意書</a>をご記入の上、ご来院時にお持ち下さい。
+    <header>
+        <h1>日本ウェルネス再生クリニック</h1>
+    </header>
+    <h2>日本ウェルネス再生クリニック LINE予約</h2>
+    <main class="firstPage">
+        <div class="dis">
+            <p>
+                【ご予約の注意点】<br>
+                来院当日はカウンセリングのみのご予約となります。
+            </p>
+            <p>
+                ＊以下の内容のご予約をご希望の方は、<br>
+                お電話、もしくはLINEトークにてご連絡ください。<br>
+                (電話応答・LINE対応時間10:00 - 19:00/<a href="tel:0120-4874-25">TEL 0120-4874-25</a>)<br>
+                ・当日のご予約をご希望の方<br>
+                ・当日にカウンセリング＋施術をご希望の方<br>
+                ＊LINEメッセージは24時間お送りいただけますが、当院からのご返信は診療時間のみとさせていただきます。
+            </p>
+        </div>
+        <button type="button" id="formStart" class="formStart">予約へ進む</button>
+        <p class="policy">
+            プライバシーポリシー
         </p>
-        <form action="https://script.google.com/macros/s/AKfycbxTlXRsJNKvgWDZjjFQH9qYYprOuVZbW5qrUd5ahaeK3tyoNslWBbQy1_sOte9o4uBlOQ/exec" method="post">
-            <div class="form-item">
-                <div class="form-q">
-                    <label>診療を選択してください</label>
-                </div>
-                <div class="form-c">
-                    <div>
-                        <input type="radio" id="menu1" name="menu" value="医療脱毛カウンセリング" required>
-                        <label for="menu1">医療脱毛カウンセリング</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="menu2" name="menu" value="美容全般カウンセリング" required>
-                        <label for="menu2">美容全般カウンセリング</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="menu3" name="menu" value="二重埋没法カウンセリング" required>
-                        <label for="menu3">二重埋没法カウンセリング</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="menu4" name="menu" value="自毛植毛カウンセリング" required>
-                        <label for="menu4">自毛植毛カウンセリング</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="menu5" name="menu" value="再生医療カウンセリング" required>
-                        <label for="menu5">再生医療カウンセリング</label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-item">
-                <div class="form-q"><label for="name">お名前</label><span class="req">*</span></div>
-                <div class="form-a"><input type="text" id="name" name="name" placeholder="例）田中太郎" required></div>
-            </div>
-            <div class="form-item">
-                <div class="form-q"><label for="name">フリガナ</label><span class="req">*</span></div>
-                <div class="form-a"><input type="text" id="furigana" name="furigana" placeholder="例）タナカタロウ" required></div>
-            </div>
-            <div class="form-item">
-                <div class="form-q"><label for="email">メールアドレス</label><span class="req">*</span></div>
-                <div class="form-a"><input type="email" id="email" name="email" placeholder="例）sample@example.com" required></div>
-            </div>
-            <div class="form-item">
-                <div class="form-q"><label for="phone">電話番号</label><span class="req">*</span></div>
-                <div class="form-a"><input type="tel" id="phone" name="phone" placeholder="例）080-1234-5678" required></div>
-            </div>
-            <div class="form-item">
-                <div class="form-q"><label for="birthday">生年月日</label><span class="req">*</span></div>
-                <div class="form-a"><input type="text" id="birthday" name="birthday" placeholder="例）2000/12/14" required></div>
-            </div>
-            <div class="form-item">
-                <div class="form-c"><label>性別<span class="req">*</span></label></div>
-                <div class="form-a">
-                    <input type="radio" id="male" name="gender" value="male" required>
-                    <label for="male">男性</label>
-                    <input type="radio" id="female" name="gender" value="female" required>
-                    <label for="female">女性</label>
-                    <input type="radio" id="genderless" name="gender" value="genderless" required>
-                    <label for="genderless">その他</label>
-                </div>
-            </div>
-            <button type="submit" id="reserveBtn" class="reserveBtn">
-                仮予約をする
-            </button>
-            <div class="form-policy">
-                <p><a href="https://wbc-saisei.com/privacy.php">プライバシーポリシー</a>をお読みの上、同意して送信してください。</p>
-            </div>
-        </form>
-    </div>
+    </main>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -116,6 +68,20 @@
             input.name = name;
             input.value = value;
             document.querySelector('form').appendChild(input);
+        }
+
+        // formStart要素を取得
+        const formStart = document.getElementById('formStart');
+
+        // formStart要素が存在するか確認し、イベントリスナーを追加
+        if (formStart) {
+            formStart.addEventListener('click', function() {
+                // ページ遷移先のURL
+                const targetPath = "/form";
+                
+                // LIFF内でのページ遷移
+                liff.navigate(targetPath);
+            });
         }
     </script>
 </body>
