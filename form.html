@@ -79,5 +79,19 @@
             </div>
         </form>
     </main>
+    <script>  
+
+        // フォームに隠しフィールドを追加
+        addHiddenInput('userId', userId);
+        addHiddenInput('displayName', displayName);
+        
+        function addHiddenInput(name, value) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value;
+        document.querySelector('form').appendChild(input);
+        }
+    </script>
 </body>
 </html>    
