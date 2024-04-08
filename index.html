@@ -11,7 +11,7 @@
         <h1>日本ウェルネス再生クリニック</h1>
     </header>
     <h2>日本ウェルネス再生クリニック LINE予約</h2>
-    <main class="firstPage">
+    <div id="firstPage">
         <div class="dis">
             <p>
                 【ご予約の注意点】<br>
@@ -26,11 +26,11 @@
                 ＊LINEメッセージは24時間お送りいただけますが、当院からのご返信は診療時間のみとさせていただきます。
             </p>
         </div>
-        <button type="button" id="formStart" class="formStart">予約へ進む</button>
+        <button type="button" id="formStart" class="formBtn">予約へ進む</button>
         <p class="policy">
             プライバシーポリシー
         </p>
-    </main>
+    </div>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -72,6 +72,29 @@
                 const displayName = profile.displayName;
             }).catch(err => console.error(err));
         }
+
+        // LIFF AppのエンドポイントURL
+        const liffEndpointUrl = "https://liff.line.me/2000050276-Kjj7lW0L/form.html";
+
+        // パーマリンクを作成するための関数
+        function createPermanentLink(pageUrl) {
+        liff.permanentLink
+            .createUrlBy(pageUrl)
+            .then((permanentLink) => {
+            console.log(permanentLink);
+            })
+            .catch((error) => {
+            console.log(error);
+            });
+        }
+
+        // 指定されたページURLからパーマリンクを作成
+        createPermanentLink(`${liffEndpointUrl}?q1=v1`);
+
+        createPermanentLink(`${liffEndpointUrl}/path2?q1=v1&q2=v2`);
+
+        // 例外処理を含むパーマリンクの作成
+        createPermanentLink("https://boolin-ai.github.io/liff-form-app/");
     </script>
 </body>
 </html>    

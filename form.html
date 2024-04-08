@@ -4,82 +4,172 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>予約フォーム</title>
+    <link rel="stylesheet" href="https://boolin-ai.github.io/liff-form-app/style.css">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <header>
         <h1>日本ウェルネス再生クリニック</h1>
     </header>
-    <h2>日本ウェルネス再生クリニック LINE予約</h2>
-    <main>
+    <div>
+        <div class="flow">
+            <div>
+                <strong class="flow-item">1</strong>
+                <span>施術を選択</span>
+            </div>
+            <div>
+                <span></span>
+            </div>
+            <div>
+                <strong class="flow-item">2</strong>
+                <span>お客様情報</span>
+            </div>
+            <div>
+                <span></span>
+            </div>
+            <div>
+                <strong class="flow-item">3</strong>
+                <span>内容確認</span>
+            </div>
+        </div>
         <form action="https://script.google.com/macros/s/AKfycbxTlXRsJNKvgWDZjjFQH9qYYprOuVZbW5qrUd5ahaeK3tyoNslWBbQy1_sOte9o4uBlOQ/exec" method="post">
-            <div class="form-item">
-                <div class="form-q">
-                    <label>診療を選択してください</label>
+            <div id="formMenu">
+                <div class="form-item">
+                    <div class="form-q">
+                        <label>診療を選択してください</label>
+                    </div>
+                    <div class="form-c">
+                        <div>
+                            <input type="radio" id="menu1" name="menu" value="医療脱毛カウンセリング" required>
+                            <label for="menu1">医療脱毛カウンセリング</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="menu2" name="menu" value="美容全般カウンセリング" required>
+                            <label for="menu2">美容全般カウンセリング</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="menu3" name="menu" value="二重埋没法カウンセリング" required>
+                            <label for="menu3">二重埋没法カウンセリング</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="menu4" name="menu" value="自毛植毛カウンセリング" required>
+                            <label for="menu4">自毛植毛カウンセリング</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="menu5" name="menu" value="再生医療カウンセリング" required>
+                            <label for="menu5">再生医療カウンセリング</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-c">
-                    <div>
-                        <input type="radio" id="menu1" name="menu" value="医療脱毛カウンセリング" required>
-                        <label for="menu1">医療脱毛カウンセリング</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="menu2" name="menu" value="美容全般カウンセリング" required>
-                        <label for="menu2">美容全般カウンセリング</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="menu3" name="menu" value="二重埋没法カウンセリング" required>
-                        <label for="menu3">二重埋没法カウンセリング</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="menu4" name="menu" value="自毛植毛カウンセリング" required>
-                        <label for="menu4">自毛植毛カウンセリング</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="menu5" name="menu" value="再生医療カウンセリング" required>
-                        <label for="menu5">再生医療カウンセリング</label>
+                <button type="button" id="formNameBtn" class="formBtn">お客様情報入力へ</button>
+            </div>
+            <div id="formName">
+                <div class="form-item">
+                    <div class="form-q"><label for="name">お名前</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="name" name="name" placeholder="例）田中太郎" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="name">フリガナ</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="furigana" name="furigana" placeholder="例）タナカタロウ" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="email">メールアドレス</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="email" id="email" name="email" placeholder="例）sample@example.com" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="phone">電話番号</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="tel" id="phone" name="phone" placeholder="例）080-1234-5678" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="birthday">生年月日</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="birthday" name="birthday" placeholder="例）2000/12/14" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-c"><label>性別<span class="req">*</span></label></div>
+                    <div class="form-a">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">男性</label>
+                        <input type="radio" id="female" name="gender" value="female" required>
+                        <label for="female">女性</label>
+                        <input type="radio" id="genderless" name="gender" value="genderless" required>
+                        <label for="genderless">その他</label>
                     </div>
                 </div>
+                <button type="button" id="formConfirmationBtn" class="formBtn">確認画面へ</button>
+                <button type="button" id="backNameBtn" class="backBtn">戻る</button>
             </div>
-            <div class="form-item">
-                <div class="form-q"><label for="name">お名前</label><span class="req">*</span></div>
-                <div class="form-a"><input type="text" id="name" name="name" placeholder="例）田中太郎" required></div>
-            </div>
-            <div class="form-item">
-                <div class="form-q"><label for="name">フリガナ</label><span class="req">*</span></div>
-                <div class="form-a"><input type="text" id="furigana" name="furigana" placeholder="例）タナカタロウ" required></div>
-            </div>
-            <div class="form-item">
-                <div class="form-q"><label for="email">メールアドレス</label><span class="req">*</span></div>
-                <div class="form-a"><input type="email" id="email" name="email" placeholder="例）sample@example.com" required></div>
-            </div>
-            <div class="form-item">
-                <div class="form-q"><label for="phone">電話番号</label><span class="req">*</span></div>
-                <div class="form-a"><input type="tel" id="phone" name="phone" placeholder="例）080-1234-5678" required></div>
-            </div>
-            <div class="form-item">
-                <div class="form-q"><label for="birthday">生年月日</label><span class="req">*</span></div>
-                <div class="form-a"><input type="text" id="birthday" name="birthday" placeholder="例）2000/12/14" required></div>
-            </div>
-            <div class="form-item">
-                <div class="form-c"><label>性別<span class="req">*</span></label></div>
-                <div class="form-a">
-                    <input type="radio" id="male" name="gender" value="male" required>
-                    <label for="male">男性</label>
-                    <input type="radio" id="female" name="gender" value="female" required>
-                    <label for="female">女性</label>
-                    <input type="radio" id="genderless" name="gender" value="genderless" required>
-                    <label for="genderless">その他</label>
-                </div>
-            </div>
-            <button type="submit" id="reserveBtn" class="reserveBtn">
-                仮予約をする
-            </button>
-            <div class="form-policy">
-                <p><a href="https://wbc-saisei.com/privacy.php">プライバシーポリシー</a>をお読みの上、同意して送信してください。</p>
+            <div id="formConfirmation">
+                <button type="submit" id="submitBtn" class="formBtn">仮予約をする</button>
+                <button type="button" id="backMenuBtn" class="backBtn">戻る</button>
             </div>
         </form>
-    </main>
-    <script>  
+    </div>
+    <script> 
+        document.addEventListener('DOMContentLoaded', function () {
+            const formMenu = document.getElementById("formMenu");
+            const formName = document.getElementById("formName");
+            const formConfirmation = document.getElementById("formConfirmation");
+            const element1 = document.getElementsByClassName("flow-item")[0];
+            const element2 = document.getElementsByClassName("flow-item")[1];
+            const element3 = document.getElementsByClassName("flow-item")[2];
+            
+            // フォームを非表示にする
+            formName.style.display = "none";
+            formConfirmation.style.display = "none";
+            // activeクラスの設定
+            element1.classList.add("active");
+
+            // ボタン要素を取得
+            const formNameButton = document.getElementById("formNameBtn");
+            const formConfirmationButton = document.getElementById("formConfirmationBtn");
+            const formSubmitButton = document.getElementById("formSubmitBtn");
+            const backNameBtn = document.getElementById("backNameBtn");
+            const backMenuBtn = document.getElementById("backMenuBtn");
+
+            // フォーム「お客様情報」を表示
+            formNameButton.addEventListener("click", function() {
+                // formNameを表示し、formMenuを非表示にする
+                formMenu.style.display = "none";
+                formName.style.display = "block";
+
+                // activeクラスの設定
+                element1.classList.remove("active"); // 一旦activeクラスを削除
+                element2.classList.add("active");
+            });
+            // フォーム「施術選択」へ戻る
+            backNameBtn.addEventListener("click", function() {
+                // formNameを表示し、formMenuを非表示にする
+                formMenu.style.display = "block";
+                formName.style.display = "none";
+
+                // activeクラスの設定
+                element1.classList.add("active"); // 一旦activeクラスを削除
+                element2.classList.remove("active");
+            });
+
+            // フォーム「確認画面」を表示
+            formConfirmationButton.addEventListener("click", function() {
+                // formNameを表示し、formMenuを非表示にする
+                formName.style.display = "none";
+                formConfirmation .style.display = "block";
+
+                // activeクラスの設定
+                element2.classList.remove("active"); // 一旦activeクラスを削除
+                element3.classList.add("active");
+            });
+            // フォーム「施術選択」へ戻る
+            backMenuBtn.addEventListener("click", function() {
+                // formNameを表示し、formMenuを非表示にする
+                formName.style.display = "block";
+                formConfirmation .style.display = "none";
+
+                // activeクラスの設定
+                element2.classList.add("active"); // 一旦activeクラスを削除
+                element3.classList.remove("active");
+            });
+
+            // formSubmitButtonの処理を追加する場合はこちらに追加
+        });
 
         // フォームに隠しフィールドを追加
         addHiddenInput('userId', userId);
