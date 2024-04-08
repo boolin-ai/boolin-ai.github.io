@@ -3,58 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIFF Form Application</title>
-    <link rel="stylesheet" href="style.css">
+    <title>予約フォーム</title>
 </head>
 <body>
-    <div id="app">
-        <h1>予約フォーム</h1>
-        <form id="submitForm" action="https://script.google.com/macros/s/AKfycbzw2rBkbo4q3sVhb6kZqHVLhNacbCSSjcQvCowow1zbwkcrLkrIifMVbT5Xzek31dLN/exec" method="POST">
-            <input type="hidden" id="userId" name="userId" value="">
-            <input type="hidden" id="userName" name="userName" value="">
-            <div class="form-group">
-                <p>メニュー選択:</p>
-                <input type="radio" id="menu1" name="q1" value="メニュー1">
-                <label for="menu1">メニュー1</label><br>
-                <input type="radio" id="menu2" name="q1" value="メニュー2">
-                <label for="menu2">メニュー2</label><br>
-                <input type="radio" id="menu3" name="q1" value="メニュー3">
-                <label for="menu3">メニュー3</label>
+    <div class="form">
+        <p>当日はカウンセリングのみのご予約となります。当日に施術をご希望の場合はお電話でお問合せください。
+            <br>診療時間 10：00-19：30　<a href="tel:0120-4874-25">TEL 0120-4874-25</a>
+            <br>未成年者の方がカウンセリング・施術を受ける際は<a href="https://wbc.or.jp/images/guide/consent.pdf">未成年者同意書</a>をご記入の上、ご来院時にお持ち下さい。
+        </p>
+        <form id="reserveForm" class="reserveForm">
+            <input type="hidden" name="action" value="liffs_form_action">
+            <div class="form-item">
+                <div class="form-q">
+                    <label>診療を選択してください</label>
+                </div>
+                <div class="form-c">
+                    <div>
+                        <input type="radio" id="menu1" name="menu" value="医療脱毛カウンセリング" required>
+                        <label for="menu1">医療脱毛カウンセリング</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="menu2" name="menu" value="美容全般カウンセリング" required>
+                        <label for="menu2">美容全般カウンセリング</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="menu3" name="menu" value="二重埋没法カウンセリング" required>
+                        <label for="menu3">二重埋没法カウンセリング</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="menu4" name="menu" value="自毛植毛カウンセリング" required>
+                        <label for="menu4">自毛植毛カウンセリング</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="menu5" name="menu" value="再生医療カウンセリング" required>
+                        <label for="menu5">再生医療カウンセリング</label>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="name">名前:</label>
-                <input type="text" id="name" name="q2" required>
+            <div class="form-item">
+                <div class="form-q"><label for="name">お名前</label><span class="req">*</span></div>
+                <div class="form-a"><input type="text" id="name" name="name" placeholder="例）田中太郎" required></div>
             </div>
-            <div class="form-group">
-                <label for="email">メール:</label>
-                <input type="text" id="email" name="q3" required>
+            <div class="form-item">
+                <div class="form-q"><label for="name">フリガナ</label><span class="req">*</span></div>
+                <div class="form-a"><input type="text" id="furigana" name="furigana" placeholder="例）タナカタロウ" required></div>
             </div>
-            <div class="form-group">
-                <label for="phone">電話:</label>
-                <input type="text" id="phone" name="q4" required>
+            <div class="form-item">
+                <div class="form-q"><label for="email">メールアドレス</label><span class="req">*</span></div>
+                <div class="form-a"><input type="email" id="email" name="email" placeholder="例）sample@example.com" required></div>
             </div>
-            <div class="form-group">
-                <label for="dob">生年月日:</label>
-                <input type="text" id="dob" name="q5" placeholder="YYYY/MM/DD" required>
+            <div class="form-item">
+                <div class="form-q"><label for="phone">電話番号</label><span class="req">*</span></div>
+                <div class="form-a"><input type="tel" id="phone" name="phone" placeholder="例）080-1234-5678" required></div>
             </div>
-            <div class="form-group">
-                <p>性別:</p>
-                <input type="radio" id="genderMale" name="q6" value="男性">
-                <label for="genderMale">男性</label><br>
-                <input type="radio" id="genderFemale" name="q6" value="女性">
-                <label for="genderFemale">女性</label><br>
-                <input type="radio" id="genderOther" name="q6" value="その他">
-                <label for="genderOther">その他</label>
+            <div class="form-item">
+                <div class="form-q"><label for="birthday">生年月日</label><span class="req">*</span></div>
+                <div class="form-a"><input type="text" id="birthday" name="birthday" placeholder="例）2000/12/14" required></div>
             </div>
-            <div class="form-group">
-                <label for="datetime">日時候補:</label>
-                <input type="text" id="datetime" name="q7" placeholder="YYYY/MM/DD hh:mm" required>
+            <div class="form-item">
+                <div class="form-c"><label>性別<span class="req">*</span></label></div>
+                <div class="form-a">
+                    <input type="radio" id="male" name="gender" value="male" required>
+                    <label for="male">男性</label>
+                    <input type="radio" id="female" name="gender" value="female" required>
+                    <label for="female">女性</label>
+                    <input type="radio" id="genderless" name="gender" value="genderless" required>
+                    <label for="genderless">その他</label>
+                </div>
             </div>
-            <button type="submit">送信</button>
+            <button type="submit" id="reserveBtn" class="reserveBtn">
+                仮予約をする
+            </button>
+            <div class="form-policy">
+                <p><a href="https://wbc-saisei.com/privacy.php">プライバシーポリシー</a>をお読みの上、同意して送信してください。</p>
+            </div>
         </form>
-        
     </div>
-    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-    <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <script>
+        $(document).ready(function () {
+            const liffId = ""; // ここにLIFF IDを設定
+            initializeLiff(liffId);
+        });
+    
+        function initializeLiff(liffId) {
+            liff.init({
+                liffId: liffId
+            }).then(() => {
+                initializeApp();
+            }).catch((err) => {
+                console.log('LIFF Initialization failed ', err);
+            });
+        }
+
+        function initializeApp() {
+            if (liff.isLoggedIn()) {
+                liff.getProfile().then(profile => {
+                    const userId = profile.userId;
+                    const displayName = profile.displayName;
+                    // フォームに隠しフィールドを追加
+                    $('<input>').attr({
+                        type: 'hidden',
+                        id: 'userId',
+                        name: 'userId',
+                        value: userId
+                    }).appendTo('form');
+                    
+                    $('<input>').attr({
+                        type: 'hidden',
+                        id: 'displayName',
+                        name: 'displayName',
+                        value: displayName
+                    }).appendTo('form');
+                }).catch(err => console.error(err));
+            } else {
+                console.log("User is not logged in.");
+            }
+        }
+    
+        $(function () {
+            $('form').submit(function (event) {
+                event.preventDefault(); // フォームのデフォルト送信を防ぐ
+                
+                // フォームデータの取得とURLエンコード
+                let formData = new URLSearchParams({
+                    userId: $('#userId').val(), // LIFFから追加された隠しフィールドから値を取得
+                    displayName: $('#displayName').val(), // LIFFから追加された隠しフィールドから値を取得
+                    menu: $('input[name="menu"]:checked').val(),
+                    name: $('#name').val(),
+                    furigana: $('#furigana').val(),
+                    email: $('#email').val(),
+                    phone: $('#phone').val(),
+                    birthday: $('#birthday').val(),
+                    gender: $('input[name="gender"]:checked').val()
+                }).toString();
+    
+                postToSpreadsheet(formData);
+            });
+        });
+    
+        // スプレッドシートにデータを送信する関数
+        function postToSpreadsheet(formData) {
+            const URL = "https://script.google.com/macros/s/AKfycbxIwKCry_Dm5ZOQefIA4-rdwSW0ivm6sVuSjzOtJfehYeBynI4XoykThyk3ycUG1PQ9_g/exec";
+            
+            fetch(URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: formData
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                alert('送信が完了しました。'); // ユーザーに送信完了を知らせる
+            }).catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+        }
+    </script>
 </body>
-</html>
+</html>    
