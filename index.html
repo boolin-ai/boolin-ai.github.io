@@ -158,6 +158,7 @@
                     throw new Error('Network response was not ok');
                 }
                 alert('送信が完了しました。'); // ユーザーに送信完了を知らせる
+                liff.closeWindow();
             }).catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
             });
