@@ -42,13 +42,13 @@
 
             // formStart要素が存在するか確認し、イベントリスナーを追加
             if (formStart) {
-                formStart.addEventListener('click', function() {
+                document.getElementById("formStart").onclick = function() {
                     // ページ遷移先のURL
                     const targetPath = "/form";
                     
                     // LIFF内でのページ遷移
                     liff.navigate(targetPath);
-                });
+                };
             }
         });
     
