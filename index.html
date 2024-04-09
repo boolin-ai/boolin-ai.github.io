@@ -156,7 +156,7 @@
             
             // 初期時の表示・非表示をセット
             formPage.style.display = "none";
-            formName.style.display = "none";
+            formName.style.visibility = "hidden";
             formConfirmation.style.display = "none";
             // activeクラスの設定
             element1.classList.add("active");
@@ -194,8 +194,8 @@
             formNameButton.addEventListener("submit", function(e) {
                 e.preventDefault();
                 // formNameを表示し、formMenuを非表示にする
-                formMenu.style.display = "none";
-                formName.style.display = "block";
+                formMenu.style.visibility = "hidden";
+                formName.style.visibility = "visible";
 
                 // activeクラスの設定
                 element1.classList.remove("active"); // 一旦activeクラスを削除
