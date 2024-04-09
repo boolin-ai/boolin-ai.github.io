@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" id="formNameBtn" class="formBtn" disabled>お客様情報入力へ</button>
+                <button type="submit" id="formNameBtn" class="formBtn">お客様情報入力へ</button>
             </div>
             <div id="formName">
                 <div class="form-item">
@@ -148,7 +148,6 @@
             const formStartBtn = document.getElementById("formStartBtn");
             const formNameButton = document.getElementById("formNameBtn");
             const formConfirmationButton = document.getElementById("formConfirmationBtn");
-            const formSubmitButton = document.getElementById("formSubmitBtn");
             const backNameBtn = document.getElementById("backNameBtn");
             const backMenuBtn = document.getElementById("backMenuBtn");
             const menuRadios = document.querySelectorAll('input[name="menu"]');
@@ -162,28 +161,28 @@
             // activeクラスの設定
             element1.classList.add("active");
 
-            // 'menu'のラジオボタンの選択状態をチェック
-            function checkMenuRadios() {
-                const isSelected = [...menuRadios].some(radio => radio.checked);
-                formNameButton.disabled = !isSelected;
-            }
+            // // 'menu'のラジオボタンの選択状態をチェック
+            // function checkMenuRadios() {
+            //     const isSelected = [...menuRadios].some(radio => radio.checked);
+            //     formNameButton.disabled = !isSelected;
+            // }
 
-            // 'gender'のラジオボタンとその他のinput要素の状態をチェック
-            function checkGenderRadiosAndOtherInputs() {
-                const isGenderSelected = [...genderRadios].some(radio => radio.checked);
-                const areOtherInputsFilled = [...otherInputs].every(input => input.value.trim() !== '');
+            // // 'gender'のラジオボタンとその他のinput要素の状態をチェック
+            // function checkGenderRadiosAndOtherInputs() {
+            //     const isGenderSelected = [...genderRadios].some(radio => radio.checked);
+            //     const areOtherInputsFilled = [...otherInputs].every(input => input.value.trim() !== '');
 
-                formConfirmationButton.disabled = !(isGenderSelected && areOtherInputsFilled);
-            }
+            //     formConfirmationButton.disabled = !(isGenderSelected && areOtherInputsFilled);
+            // }
 
-            // イベントリスナーを設定
-            menuRadios.forEach(radio => radio.addEventListener('change', checkMenuRadios));
-            genderRadios.forEach(radio => radio.addEventListener('change', checkGenderRadiosAndOtherInputs));
-            otherInputs.forEach(input => input.addEventListener('input', checkGenderRadiosAndOtherInputs));
+            // // イベントリスナーを設定
+            // menuRadios.forEach(radio => radio.addEventListener('change', checkMenuRadios));
+            // genderRadios.forEach(radio => radio.addEventListener('change', checkGenderRadiosAndOtherInputs));
+            // otherInputs.forEach(input => input.addEventListener('input', checkGenderRadiosAndOtherInputs));
 
-            // 初期状態のチェック
-            checkMenuRadios();
-            checkGenderRadiosAndOtherInputs();
+            // // 初期状態のチェック
+            // checkMenuRadios();
+            // checkGenderRadiosAndOtherInputs();
             
             // フォーム「施術選択」を表示
             formStartBtn.addEventListener("click", function() {
@@ -193,6 +192,7 @@
             });
             // フォーム「お客様情報」を表示
             formNameButton.addEventListener("click", function() {
+                e.preventDefault();
                 // formNameを表示し、formMenuを非表示にする
                 formMenu.style.display = "none";
                 formName.style.display = "block";
