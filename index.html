@@ -151,7 +151,7 @@
             const formSubmitButton = document.getElementById("formSubmitBtn");
             const backNameBtn = document.getElementById("backNameBtn");
             const backMenuBtn = document.getElementById("backMenuBtn");
-            const btn = document.querySelectorAll('.formBtn'); // クラス名で指定
+            const allButtons = document.querySelectorAll('.formBtn'); // クラス名で指定
             const radioAndRequiredInputs = document.querySelectorAll('input[required], input[type="radio"]');
             
             // 初期時の表示・非表示をセット
@@ -163,23 +163,32 @@
 
             function checkFormState() {
                 let isFormFilled = true;
+                let isAnyRadioSelected = false;
 
                 // 必須フィールドが全て入力されているかチェック
                 document.querySelectorAll('#form input[required]').forEach(function(input) {
-                if (!input.value) {
-                    isFormFilled = false;
-                }
+                    if (!input.value.trim()) {
+                        isFormFilled = false;
+                    }
                 });
 
                 // ラジオボタンのグループごとに選択されているかチェック
-                const radioNames = [...new Set(Array.from(radioAndRequiredInputs).filter(input => input.type === 'radio').map(input => input.name))];
-                const isAllRadiosSelected = radioNames.every(name => 
-                Array.from(document.querySelectorAll(`input[name="${name}"]`)).some(input => input.checked)
-                );
+                const radioGroups = document.querySelectorAll('input[type="radio"][name]');
+                const checkedRadios = new Set(); // 選択されたラジオボタンのnameを格納するセット
+                radioGroups.forEach(radio => {
+                    if (radio.checked) {
+                        checkedRadios.add(radio.name);
+                    }
+                });
+                isAnyRadioSelected = checkedRadios.size > 0;
 
                 // すべての条件を満たす場合のみすべてのボタンを有効化
-                formNameBtns.forEach(btn => {
-                btn.disabled = !(isFormFilled && isAllRadiosSelected);
+                allButtons.forEach(btn => {
+                    if (btn.id === "formNameBtn" || btn.id === "formConfirmationBtn") {
+                        btn.disabled = !(isFormFilled && isAnyRadioSelected);
+                    } else {
+                        btn.disabled = !isFormFilled; // 他のボタンは必須フィールドの入力のみで有効化
+                    }
                 });
             }
 
@@ -188,6 +197,9 @@
                 input.addEventListener('change', checkFormState);
                 input.addEventListener('input', checkFormState);
             });
+
+    // 初期状態のフォーム状態をチェック
+    checkFormState();
 
             // フォーム「施術選択」を表示
             formStartBtn.addEventListener("click", function() {
