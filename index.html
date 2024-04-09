@@ -104,11 +104,11 @@
                 <div class="form-item">
                     <div class="form-c"><label>性別<span class="req">*</span></label></div>
                     <div class="form-a">
-                        <input type="radio" id="male" name="gender" value="male" required>
+                        <input type="radio" id="male" name="gender" value="男性" required>
                         <label for="male">男性</label>
-                        <input type="radio" id="female" name="gender" value="female" required>
+                        <input type="radio" id="female" name="gender" value="女性" required>
                         <label for="female">女性</label>
-                        <input type="radio" id="genderless" name="gender" value="genderless" required>
+                        <input type="radio" id="genderless" name="gender" value="その他" required>
                         <label for="genderless">その他</label>
                     </div>
                 </div>
@@ -133,6 +133,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             // ページセクション要素を取得    
             const firstPage = document.getElementById("firstPage");
+            const form = document.getElementById('form');
             const formPage = document.getElementById("formPage");
             const formMenu = document.getElementById("formMenu");
             const formName = document.getElementById("formName");
@@ -150,8 +151,8 @@
             const formSubmitButton = document.getElementById("formSubmitBtn");
             const backNameBtn = document.getElementById("backNameBtn");
             const backMenuBtn = document.getElementById("backMenuBtn");
-            const form = document.getElementById('form');
-            const btn = document.querySelector('.formBtn'); // クラス名で指定
+            const btn = document.querySelectorAll('.formBtn'); // クラス名で指定
+            const radioGroups = document.querySelectorAll('[name="menu"], [name="gender"]');
             
             // 初期時の表示・非表示をセット
             formPage.style.display = "none";
@@ -160,17 +161,31 @@
             // activeクラスの設定
             element1.classList.add("active");
 
-            form.addEventListener('input', function() {
-                // フォーム内の必須フィールドが全て入力されているかチェック
+            // フォーム内の必須フィールドとラジオボタンの状態をチェック
+            function checkFormState() {
                 let isFormFilled = true;
+                
+                // 必須フィールドが全て入力されているかチェック
                 document.querySelectorAll('#myForm input[required]').forEach(function(input) {
                 if (!input.value) {
                     isFormFilled = false;
                 }
                 });
 
-                // フォームの入力状態に基づいてボタンのdisabled属性を更新
-                btn.disabled = !isFormFilled;
+                // ラジオボタンのグループごとに選択されているかチェック
+                const radioNames = [...new Set(Array.from(radioGroups).map(input => input.name))];
+                const isAllRadiosSelected = radioNames.every(name => 
+                Array.from(document.querySelectorAll(`input[name="${name}"]`)).some(input => input.checked)
+                );
+
+                // すべての条件を満たす場合のみボタンを有効化
+                formNameBtn.disabled = !(isFormFilled && isAllRadiosSelected);
+            }
+
+            // イベントリスナーを設定
+            document.querySelectorAll('#form input[required], [name="menu"], [name="gender"]').forEach(input => {
+                input.addEventListener('change', checkFormState);
+                input.addEventListener('input', checkFormState);
             });
 
             // フォーム「施術選択」を表示

@@ -65,8 +65,12 @@ h2 {
     padding: 9px 19px;
     border-radius: 30px;
 }
-.policy {
+footer {
     margin-top: -20px;
+    display: flex;
+    justify-content: center;
+}
+.policy {
     font-size: 12px;
     text-align: center;
 }
