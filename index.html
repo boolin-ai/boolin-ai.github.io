@@ -151,9 +151,9 @@
             const formSubmitButton = document.getElementById("formSubmitBtn");
             const backNameBtn = document.getElementById("backNameBtn");
             const backMenuBtn = document.getElementById("backMenuBtn");
-            const allButtons = document.querySelectorAll('#form .formBtn'); // クラス名で指定
-            const requiredInputs = document.querySelectorAll('#form input[required]');
-            const radioInputs = document.querySelectorAll('#form input[type="radio"]');
+            const menuRadios = document.querySelectorAll('input[name="menu"]');
+            const genderRadios = document.querySelectorAll('input[name="gender"]');
+            const otherInputs = document.querySelectorAll('#form input[required]:not([name="menu"]):not([name="gender"])');
             
             // 初期時の表示・非表示をセット
             formPage.style.display = "none";
@@ -162,24 +162,29 @@
             // activeクラスの設定
             element1.classList.add("active");
 
-            function checkFormState() {
-                let isFormFilled = Array.from(requiredInputs).every(input => input.value.trim() !== '');
-                let isAnyRadioSelected = Array.from(new Set(Array.from(radioInputs).map(input => input.name)))
-                    .every(name => document.querySelector(`input[name="${name}"]:checked`));
-
-                // 条件を満たす場合のみボタンを有効化
-                allButtons.forEach(btn => btn.disabled = !(isFormFilled && isAnyRadioSelected));
+            // 'menu'のラジオボタンの選択状態をチェック
+            function checkMenuRadios() {
+                const isSelected = [...menuRadios].some(radio => radio.checked);
+                formNameButton.disabled = !isSelected;
             }
 
-            // 必須入力フィールドとラジオボタンにイベントリスナーを設定
-            [...requiredInputs, ...radioInputs].forEach(input => {
-                input.addEventListener('change', checkFormState);
-                input.addEventListener('input', checkFormState);
-            });
+            // 'gender'のラジオボタンとその他のinput要素の状態をチェック
+            function checkGenderRadiosAndOtherInputs() {
+                const isGenderSelected = [...genderRadios].some(radio => radio.checked);
+                const areOtherInputsFilled = [...otherInputs].every(input => input.value.trim() !== '');
+
+                formConfirmationButton.disabled = !(isGenderSelected && areOtherInputsFilled);
+            }
+
+            // イベントリスナーを設定
+            menuRadios.forEach(radio => radio.addEventListener('change', checkMenuRadios));
+            genderRadios.forEach(radio => radio.addEventListener('change', checkGenderRadiosAndOtherInputs));
+            otherInputs.forEach(input => input.addEventListener('input', checkGenderRadiosAndOtherInputs));
 
             // 初期状態のチェック
-            checkFormState();
-
+            checkMenuRadios();
+            checkGenderRadiosAndOtherInputs();
+            
             // フォーム「施術選択」を表示
             formStartBtn.addEventListener("click", function() {
                 // formNameを表示し、formMenuを非表示にする
