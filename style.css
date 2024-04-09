@@ -23,11 +23,12 @@ h2 {
     width: 100%;
     margin: 0 auto;
     font-size: 15px;
-    padding: 20px 0 10px 0;
+    padding-bottom: 10px;
     border-bottom: #BA9D5A solid 1.8px;
 }
 #firstPage {
-    width: 85%;
+    width:100%;
+    padding: 20px;
     margin: 0 auto;
 }
 
@@ -78,7 +79,7 @@ h2 {
     padding: 20px;
 }
 .flow div {
-    width: 18%;
+    width: 1%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,6 +98,18 @@ h2 {
 .flow-item.active {
     background: #BA9D5A;
 }
+.flow div:nth-child(1),
+.flow div:nth-child(3),
+.flow div:nth-child(5) {
+    width: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.flow div:nth-child(2),
+.flow div:nth-child(4) {
+    width: 40px;
+}
 .flow div:nth-child(2) span,
 .flow div:nth-child(4) span{
     width: 20px;
@@ -105,9 +118,6 @@ h2 {
 }
 form {
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 .form-item {
 
@@ -125,6 +135,7 @@ form {
     padding: 20px;
 }
 .confirmation-content {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
