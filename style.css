@@ -73,6 +73,7 @@ footer {
 .policy {
     font-size: 12px;
     text-align: center;
+    color: #0000EE;
 }
 /* 
 */
@@ -110,9 +111,11 @@ footer {
 .flow div:nth-child(2),
 .flow div:nth-child(4) {
     width: 40px;
+    text-align: center;
 }
 .flow div:nth-child(2) span,
 .flow div:nth-child(4) span{
+    display: inline-block;
     width: 20px;
     height: 1.8px;
     background: #909090;
