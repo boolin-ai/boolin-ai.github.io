@@ -49,7 +49,7 @@
                 <span>内容確認</span>
             </div>
         </div>
-        <form action="https://script.google.com/macros/s/AKfycbxTlXRsJNKvgWDZjjFQH9qYYprOuVZbW5qrUd5ahaeK3tyoNslWBbQy1_sOte9o4uBlOQ/exec" method="post">
+        <form id="form" action="https://script.google.com/macros/s/AKfycbxTlXRsJNKvgWDZjjFQH9qYYprOuVZbW5qrUd5ahaeK3tyoNslWBbQy1_sOte9o4uBlOQ/exec" method="post">
             <div id="formMenu">
                 <div class="form-item">
                     <div class="form-q">
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" id="formNameBtn" class="formBtn">お客様情報入力へ</button>
+                <button type="button" id="formNameBtn" class="formBtn" disabled>お客様情報入力へ</button>
             </div>
             <div id="formName">
                 <div class="form-item">
@@ -112,7 +112,7 @@
                         <label for="genderless">その他</label>
                     </div>
                 </div>
-                <button type="button" id="formConfirmationBtn" class="formBtn">確認画面へ</button>
+                <button type="button" id="formConfirmationBtn" class="formBtn" disabled>確認画面へ</button>
                 <button type="button" id="backNameBtn" class="backBtn">戻る</button>
             </div>
             <div id="formConfirmation">
@@ -150,6 +150,8 @@
             const formSubmitButton = document.getElementById("formSubmitBtn");
             const backNameBtn = document.getElementById("backNameBtn");
             const backMenuBtn = document.getElementById("backMenuBtn");
+            const form = document.getElementById('form');
+            const btn = document.querySelector('.formBtn'); // クラス名で指定
             
             // 初期時の表示・非表示をセット
             formPage.style.display = "none";
@@ -157,6 +159,19 @@
             formConfirmation.style.display = "none";
             // activeクラスの設定
             element1.classList.add("active");
+
+            form.addEventListener('input', function() {
+                // フォーム内の必須フィールドが全て入力されているかチェック
+                let isFormFilled = true;
+                document.querySelectorAll('#myForm input[required]').forEach(function(input) {
+                if (!input.value) {
+                    isFormFilled = false;
+                }
+                });
+
+                // フォームの入力状態に基づいてボタンのdisabled属性を更新
+                btn.disabled = !isFormFilled;
+            });
 
             // フォーム「施術選択」を表示
             formStartBtn.addEventListener("click", function() {
