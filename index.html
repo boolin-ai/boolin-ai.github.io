@@ -151,8 +151,8 @@
             const formSubmitButton = document.getElementById("formSubmitBtn");
             const backNameBtn = document.getElementById("backNameBtn");
             const backMenuBtn = document.getElementById("backMenuBtn");
-            const btn = document.querySelector('.formBtn'); // クラス名で指定
-            const radioGroups = document.querySelectorAll('[name="menu"], [name="gender"]');
+            const btn = document.querySelectorAll('.formBtn'); // クラス名で指定
+            const radioAndRequiredInputs = document.querySelectorAll('input[required], input[type="radio"]');
             
             // 初期時の表示・非表示をセット
             formPage.style.display = "none";
@@ -161,29 +161,30 @@
             // activeクラスの設定
             element1.classList.add("active");
 
-            // フォーム内の必須フィールドとラジオボタンの状態をチェック
             function checkFormState() {
                 let isFormFilled = true;
-                
+
                 // 必須フィールドが全て入力されているかチェック
-                document.querySelectorAll('#myForm input[required]').forEach(function(input) {
+                document.querySelectorAll('#form input[required]').forEach(function(input) {
                 if (!input.value) {
                     isFormFilled = false;
                 }
                 });
 
                 // ラジオボタンのグループごとに選択されているかチェック
-                const radioNames = [...new Set(Array.from(radioGroups).map(input => input.name))];
+                const radioNames = [...new Set(Array.from(radioAndRequiredInputs).filter(input => input.type === 'radio').map(input => input.name))];
                 const isAllRadiosSelected = radioNames.every(name => 
                 Array.from(document.querySelectorAll(`input[name="${name}"]`)).some(input => input.checked)
                 );
 
-                // すべての条件を満たす場合のみボタンを有効化
-                formNameBtn.disabled = !(isFormFilled && isAllRadiosSelected);
+                // すべての条件を満たす場合のみすべてのボタンを有効化
+                formNameBtns.forEach(btn => {
+                btn.disabled = !(isFormFilled && isAllRadiosSelected);
+                });
             }
 
             // イベントリスナーを設定
-            document.querySelectorAll('#form input[required], [name="menu"], [name="gender"]').forEach(input => {
+            radioAndRequiredInputs.forEach(input => {
                 input.addEventListener('change', checkFormState);
                 input.addEventListener('input', checkFormState);
             });
