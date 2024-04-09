@@ -23,8 +23,8 @@
                 (電話応答・LINE対応時間10:00 - 19:00/<a href="tel:0120-4874-25">TEL 0120-4874-25</a>)<br>
                 ・当日のご予約をご希望の方<br>
                 ・当日にカウンセリング＋施術をご希望の方<br>
-                ＊LINEメッセージは24時間お送りいただけますが、当院からのご返信は診療時間のみとさせていただきます。
             </p>
+            <p>＊LINEメッセージは24時間お送りいただけますが、当院からのご返信は診療時間のみとさせていただきます。</p>
         </div>
         <button type="button" id="formStartBtn" class="formBtn">予約へ進む</button>
     </div>
@@ -32,7 +32,7 @@
         <div class="flow">
             <div>
                 <strong class="flow-item">1</strong>
-                <span>施術を選択</span>
+                <span>メニュー選択</span>
             </div>
             <div>
                 <span></span>
@@ -116,6 +116,7 @@
                 <button type="button" id="backNameBtn" class="backBtn">戻る</button>
             </div>
             <div id="formConfirmation">
+                <div class="confirmation-content"></div>
                 <button type="submit" id="formSubmitBtn" class="formBtn">仮予約をする</button>
                 <button type="button" id="backMenuBtn" class="backBtn">戻る</button>
             </div>
@@ -193,6 +194,29 @@
                 // activeクラスの設定
                 element2.classList.remove("active"); // 一旦activeクラスを削除
                 element3.classList.add("active");
+
+                // フォームデータの取得
+                const menu = document.querySelector('input[name="menu"]:checked').value;
+                const name = document.getElementById('name').value;
+                const furigana = document.getElementById('furigana').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const birthday = document.getElementById('birthday').value;
+                const gender = document.querySelector('input[name="gender"]:checked').value;
+
+                // 確認画面の要素を取得
+                const confirmationContent = document.querySelector('.confirmation-content');
+
+                // 確認画面に表示する内容を組み立て
+                confirmationContent.innerHTML = `
+                <p>メニュー選択: ${menu}</p>
+                <p>お名前: ${name}</p>
+                <p>フリガナ: ${furigana}</p>
+                <p>メールアドレス: ${email}</p>
+                <p>電話番号: ${phone}</p>
+                <p>生年月日: ${birthday}</p>
+                <p>性別: ${gender}</p>
+                `;
             });
             // フォーム「施術選択」へ戻る
             backMenuBtn.addEventListener("click", function() {
