@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 body {
+    font-family: Helvetica, sans-serif;
     background: #FFF;
 }
 header {
@@ -19,14 +20,14 @@ h1 {
 /* トップページ */
 h2 {
     display: block;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     font-size: 15px;
     padding: 20px 0 10px 0;
     border-bottom: #BA9D5A solid 1.8px;
 }
 #firstPage {
-    width: 90%;
+    width: 85%;
     margin: 0 auto;
 }
 
@@ -41,7 +42,7 @@ h2 {
 }
 .formBtn {
     display: block;
-    width: 90%;
+    width: 100%;
     margin: 20px auto;
     background: #BA9D5A;
     color: #FFF;
@@ -83,7 +84,7 @@ h2 {
 }
 .flow div strong {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 8px 12px;
     background: #f1f1f1;
     color: #FFF;
     border-radius: 50%;

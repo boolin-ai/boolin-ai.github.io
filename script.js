@@ -16,7 +16,7 @@ function initializeLiff(liffId) {
             liff.login(); // ユーザーがログインしていない場合はログインを促す
         }
     }).catch((err) => {
-        console.error('LIFF Initialization failed', err);
+        console.error('LIFF初期化に失敗しました', err);
     });
 }
 
@@ -49,13 +49,13 @@ function submitForm(e) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('レスポンスに失敗しました。');
         }
         return response.json();
     })
     .then(data => console.log('Success:', data))
     .catch((error) => {
-        console.error('Error:', error);
+        console.error('エラー:', error);
     });
 }
 
