@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 body {
+    font-family: Helvetica, sans-serif;
     background: #FFF;
 }
 header {
@@ -19,14 +20,14 @@ h1 {
 /* トップページ */
 h2 {
     display: block;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     font-size: 15px;
     padding: 20px 0 10px 0;
     border-bottom: #BA9D5A solid 1.8px;
 }
 #firstPage {
-    width: 90%;
+    width: 85%;
     margin: 0 auto;
 }
 
@@ -46,7 +47,7 @@ h2 {
     background: #BA9D5A;
     color: #FFF;
     border: 0px;
-    padding: 8px 20px;
+    padding: 12px 20px;
     border-radius: 30px;
 }
 .backBtn {
@@ -56,7 +57,7 @@ h2 {
     background: #fff;
     color: #000;
     border: #BA9D5A solid 1px;
-    padding: 7px 19px;
+    padding: 11px 19px;
     border-radius: 30px;
 }
 .policy {
@@ -83,7 +84,7 @@ h2 {
 }
 .flow div strong {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 8px 12px;
     background: #f1f1f1;
     color: #FFF;
     border-radius: 50%;
