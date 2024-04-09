@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" id="formNameBtn" class="formBtn">お客様情報入力へ</button>
+                <button type="button" id="formNameBtn" class="formBtn" disabled>お客様情報入力へ</button>
             </div>
             <div id="formName">
                 <div class="form-item">
@@ -156,7 +156,7 @@
             
             // 初期時の表示・非表示をセット
             formPage.style.display = "none";
-            formName.style.visibility = "hidden";
+            formName.style.display = "none";
             formConfirmation.style.display = "none";
             // activeクラスの設定
             element1.classList.add("active");
@@ -191,11 +191,16 @@
                 formPage.style.display = "block";
             });
             // フォーム「お客様情報」を表示
-            formNameButton.addEventListener("submit", function(e) {
-                e.preventDefault();
+            formNameButton.addEventListener("click", function() {
+                // 'menu'のラジオボタンの状態を再チェック
+                const isMenuSelected = [...menuRadios].some(radio => radio.checked);
+                if (!isMenuSelected) {
+                    alert('入力されていない内容があります');
+                    return; // 処理を中断
+                }
                 // formNameを表示し、formMenuを非表示にする
-                formMenu.style.visibility = "hidden";
-                formName.style.visibility = "visible";
+                formMenu.style.display = "none";
+                formName.style.display = "block";
 
                 // activeクラスの設定
                 element1.classList.remove("active"); // 一旦activeクラスを削除
@@ -214,6 +219,14 @@
 
             // フォーム「確認画面」を表示
             formConfirmationButton.addEventListener("click", function() {
+                 // 'gender'のラジオボタンとその他のinput要素の状態を再チェック
+                const isGenderSelected = [...genderRadios].some(radio => radio.checked);
+                const areOtherInputsFilled = [...otherInputs].every(input => input.value.trim() !== '');
+                
+                if (!(isGenderSelected && areOtherInputsFilled)) {
+                    alert('入力されていない内容があります');
+                    return; // 処理を中断
+                }
                 // formNameを表示し、formMenuを非表示にする
                 formName.style.display = "none";
                 formConfirmation .style.display = "block";
