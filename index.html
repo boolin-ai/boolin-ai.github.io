@@ -26,7 +26,7 @@
                 ＊LINEメッセージは24時間お送りいただけますが、当院からのご返信は診療時間のみとさせていただきます。
             </p>
         </div>
-        <button type="button" id="formStart" class="formBtn">予約へ進む</button>
+        <button type="button" id="formStartBtn" class="formBtn">予約へ進む</button>
     </div>
     <div id="formPage">
         <div class="flow">
@@ -143,6 +143,7 @@
             const element3 = document.getElementsByClassName("flow-item")[2];
 
             // ボタン要素を取得
+            const formStartBtn = document.getElementById("formStartBtn");
             const formNameButton = document.getElementById("formNameBtn");
             const formConfirmationButton = document.getElementById("formConfirmationBtn");
             const formSubmitButton = document.getElementById("formSubmitBtn");
@@ -157,7 +158,7 @@
             element1.classList.add("active");
 
             // フォーム「施術選択」を表示
-            formNameButton.addEventListener("click", function() {
+            formStartBtn.addEventListener("click", function() {
                 // formNameを表示し、formMenuを非表示にする
                 firstPage.style.display = "none";
                 formPage.style.display = "block";
