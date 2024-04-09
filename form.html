@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>予約フォーム</title>
     <link rel="stylesheet" href="https://boolin-ai.github.io/liff-form-app/style.css">
-    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <header>
@@ -104,8 +103,10 @@
             </div>
         </form>
     </div>
+    <script src="script.js"></script>
     <script> 
         document.addEventListener('DOMContentLoaded', function () {
+
             const formMenu = document.getElementById("formMenu");
             const formName = document.getElementById("formName");
             const formConfirmation = document.getElementById("formConfirmation");
@@ -170,18 +171,6 @@
 
             // formSubmitButtonの処理を追加する場合はこちらに追加
         });
-
-        // フォームに隠しフィールドを追加
-        addHiddenInput('userId', userId);
-        addHiddenInput('displayName', displayName);
-        
-        function addHiddenInput(name, value) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        input.value = value;
-        document.querySelector('form').appendChild(input);
-        }
     </script>
 </body>
 </html>    
