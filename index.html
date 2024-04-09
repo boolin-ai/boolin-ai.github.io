@@ -191,7 +191,7 @@
                 formPage.style.display = "block";
             });
             // フォーム「お客様情報」を表示
-            formNameButton.addEventListener("click", function() {
+            formNameButton.addEventListener("submit", function(e) {
                 e.preventDefault();
                 // formNameを表示し、formMenuを非表示にする
                 formMenu.style.display = "none";
