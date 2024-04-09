@@ -24,26 +24,8 @@ function initializeApp() {
     liff.getProfile().then(profile => {
         userId = profile.userId; // グローバル変数に代入
         displayName = profile.displayName; // グローバル変数に代入
-        
-        // 「予約へ進む」ボタンの設定
-        const formStartBtn = document.getElementById('formStart');
-        if (formStartBtn) {
-            formStartBtn.addEventListener('click', () => {
-                // LIFFアプリ内の特定のページへの恒久的なリンクを生成
-                liff.permanentLink.createUrlBy('ここにLIFFアプリの特定のページのURL').then(permanentLink => {
-                    // 生成された恒久的なリンクを使ってページ遷移
-                    window.location.href = permanentLink;
-                }).catch(error => {
-                    console.error('Error creating permanent link:', error);
-                });
-            });
-        }
     }).catch(err => console.error(err));
 }
-
-// フォーム送信イベントリスナーの設定は、`form.html`がロードされた後でなければなりません。
-// そのため、`formSubmitBtn`の設定は`initializeApp`の外で行うことができません。
-// `formSubmitBtn`関連のコードは、`form.html`内でこのスクリプトが再度読み込まれた場合にのみ実行されるように配置する必要があります。
 
 function submitForm(e) {
     e.preventDefault(); // フォームのデフォルト送信を防止
