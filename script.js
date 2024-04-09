@@ -1,20 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const liffId = "2000050276-Kjj7lW0L"; // ここにLIFF IDを設定
     initializeLiff(liffId);
-
-    // formStart要素を取得
-    const formStart = document.getElementById('formStart');
-
-    // formStart要素が存在するか確認し、イベントリスナーを追加
-    if (formStart) {
-        document.getElementById("formStart").onclick = function() {
-            // ページ遷移先のURL
-            const targetPath = "/form";
-            
-            // LIFF内でのページ遷移
-            liff.navigate(targetPath);
-        };
-    }
 });
 
 function initializeLiff(liffId) {
