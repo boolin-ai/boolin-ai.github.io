@@ -133,8 +133,9 @@ form {
 
 }
 .form-c {
-
+    display: flex;
 }
+
 #formConfirmation {
     padding: 20px;
 }
