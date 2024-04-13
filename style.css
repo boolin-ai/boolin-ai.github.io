@@ -22,7 +22,7 @@ h2 {
     display: block;
     width: 100%;
     margin: 0 auto;
-    font-size: 15px;
+    font-size: 16px;
     padding-bottom: 10px;
     border-bottom: #BA9D5A solid 1.8px;
 }
@@ -39,7 +39,7 @@ h2 {
     margin: 20px 0;
 }
 .dis p{
-    font-size: 12px;
+    font-size: 13px;
 }
 .formBtn {
     display: block;
