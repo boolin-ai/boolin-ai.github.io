@@ -66,7 +66,7 @@ h2 {
     border-radius: 30px;
 }
 footer {
-    margin-top: -20px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: center;
 }
@@ -120,6 +120,13 @@ footer {
     height: 1.8px;
     background: #909090;
 }
+
+#formMenu,
+#formName {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
 form {
     padding: 20px;
 }
@@ -127,13 +134,21 @@ form {
 
 }
 .form-q {
-
 }
-.form-a {
-
+.form-a input{
+    padding: 8px 10px;
+    width: 100%;
+    font-size: 16px;
+    border: solid 2px #BA9D5A;
+    box-shadow: 0px 5px 5px 0 rgba(0, 0, 0, 0.1);
 }
-.form-c {
-    display: flex;
+.form-c div{
+    text-align: center;
+    background: #BA9D5A;
+    color: #FFF;
+    margin-top: 10px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
 }
 
 #formConfirmation {
