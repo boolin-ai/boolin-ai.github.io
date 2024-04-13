@@ -166,6 +166,7 @@ form {
 #formName .form-c {
     display: flex;
     gap: 12px;
+    align-items: center;
 }
 .confirmation-content {
     width: 100%;
