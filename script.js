@@ -374,15 +374,13 @@ function createFlexMessage(formData) {
     };
 }
 
-function sendMessage(flexContent) {
-    if (liff.isLoggedIn()) {
+function sendMessage(flex) {
         liff.sendMessages([{
-            "type": "flex",
-            "altText": "これはFlexメッセージです",
-            "contents": flexContent
+            type: "flex",
+            altText: "仮予約を受け付けました",
+            contents: flex
         }]).then(() => {
             console.log('Flex message sent successfully');
-            alert('予約が確認されました。確認メッセージを送りましたのでご確認ください。');
+            liff.closeWindow();
         }).catch((error) => {})
-    }
 }
