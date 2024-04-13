@@ -55,7 +55,7 @@ function submitForm(e) {
     formData.forEach((value, key) => object[key] = value);
     let json = JSON.stringify(object);
     
-    fetch('https://prima-pr.com.com/wp-json/myapi/v1/submit/', {
+    fetch('https://prima-pr.com/wp-json/myapi/v1/submit/', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
