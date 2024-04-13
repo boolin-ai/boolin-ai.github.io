@@ -230,7 +230,7 @@
                 }
                 // formNameを表示し、formMenuを非表示にする
                 formName.style.display = "none";
-                formConfirmation .style.display = "block";
+                formConfirmation .style.display = "flex";
 
                 // activeクラスの設定
                 element2.classList.remove("active"); // 一旦activeクラスを削除
@@ -250,13 +250,13 @@
 
                 // 確認画面に表示する内容を組み立て
                 confirmationContent.innerHTML = `
-                <p>メニュー選択: ${menu}</p>
-                <p>お名前: ${name}</p>
-                <p>フリガナ: ${furigana}</p>
-                <p>メールアドレス: ${email}</p>
-                <p>電話番号: ${phone}</p>
-                <p>生年月日: ${birthday}</p>
-                <p>性別: ${gender}</p>
+                <p>メニュー選択: <span>${menu}</span></p>
+                <p>お名前: <span>${name}</span></p>
+                <p>フリガナ: <span>${furigana}</span></p>
+                <p>メールアドレス: <span>${email}</span></p>
+                <p>電話番号: <span>${phone}</span></p>
+                <p>生年月日: <span>${birthday}</span></p>
+                <p>性別: <span>${gender}</span></p>
                 `;
             });
             // フォーム「施術選択」へ戻る

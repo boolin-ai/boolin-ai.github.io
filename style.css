@@ -36,7 +36,7 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin: 20px 0 0 0;
+    margin: 20px 0;
 }
 .dis p{
     font-size: 12px;
@@ -122,10 +122,11 @@ footer {
 }
 
 #formMenu,
-#formName {
+#formName,
+#formConfirmation {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 20px;
 }
 form {
     padding: 20px;
@@ -158,18 +159,13 @@ form {
     text-align: center;
     background: #fff;
     color: #333;
-    margin-top: 10px;
-    box-shadow: 0px 1px 10px 2px  rgba(0, 0, 0, 0.1);
+    margin-top: 12px;
+    box-shadow: 0px 1px 8px 2px  rgba(0, 0, 0, 0.1);
     border-radius: 4px;
 }
 #formName .form-c {
     display: flex;
     gap: 12px;
-}
-#formConfirmation {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
 }
 .confirmation-content {
     width: 100%;
