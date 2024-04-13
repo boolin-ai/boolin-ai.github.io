@@ -156,13 +156,16 @@ form {
 .form-c div{
     padding: 8px;
     text-align: center;
-    background: #BA9D5A;
-    color: #FFF;
+    background: #fff;
+    color: #333;
     margin-top: 10px;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 10px 2px  rgba(0, 0, 0, 0.1);
     border-radius: 4px;
 }
-
+#formName .form-c {
+    display: flex;
+    gap: 12px;
+}
 #formConfirmation {
     display: flex;
     flex-direction: column;
