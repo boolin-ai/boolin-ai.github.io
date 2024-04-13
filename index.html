@@ -49,7 +49,7 @@
                 <span>内容確認</span>
             </div>
         </div>
-        <form id="form" action="https://script.google.com/macros/s/AKfycbxTlXRsJNKvgWDZjjFQH9qYYprOuVZbW5qrUd5ahaeK3tyoNslWBbQy1_sOte9o4uBlOQ/exec" method="post">
+        <form id="form">
             <div id="formMenu">
                 <div class="form-item">
                     <div class="form-q">
@@ -77,6 +77,18 @@
                             <label for="menu5">再生医療カウンセリング</label>
                         </div>
                     </div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="f-choice">第一希望日</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="f-choice" name="f-choice" placeholder="5/10 10:00" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="s-choice">第二希望日</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="s-choice" name="s-choice" placeholder="5/10 12:00" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="t-choice">第三希望日</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="t-choice" name="t-choice" placeholder="5/11 12:00" required></div>
                 </div>
                 <button type="button" id="formNameBtn" class="formBtn">お客様情報入力へ</button>
             </div>
@@ -127,7 +139,7 @@
             プライバシーポリシー
         </a>
     </footer>
-    <!-- <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script> -->
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script src="https://boolin-ai.github.io/liff-form-app/script.js"></script>
     <script> 
         document.addEventListener('DOMContentLoaded', function () {
@@ -160,29 +172,6 @@
             formConfirmation.style.display = "none";
             // activeクラスの設定
             element1.classList.add("active");
-
-            // // 'menu'のラジオボタンの選択状態をチェック
-            // function checkMenuRadios() {
-            //     const isSelected = [...menuRadios].some(radio => radio.checked);
-            //     formNameButton.disabled = !isSelected;
-            // }
-
-            // // 'gender'のラジオボタンとその他のinput要素の状態をチェック
-            // function checkGenderRadiosAndOtherInputs() {
-            //     const isGenderSelected = [...genderRadios].some(radio => radio.checked);
-            //     const areOtherInputsFilled = [...otherInputs].every(input => input.value.trim() !== '');
-
-            //     formConfirmationButton.disabled = !(isGenderSelected && areOtherInputsFilled);
-            // }
-
-            // // イベントリスナーを設定
-            // menuRadios.forEach(radio => radio.addEventListener('change', checkMenuRadios));
-            // genderRadios.forEach(radio => radio.addEventListener('change', checkGenderRadiosAndOtherInputs));
-            // otherInputs.forEach(input => input.addEventListener('input', checkGenderRadiosAndOtherInputs));
-
-            // // 初期状態のチェック
-            // checkMenuRadios();
-            // checkGenderRadiosAndOtherInputs();
             
             // フォーム「施術選択」を表示
             formStartBtn.addEventListener("click", function() {
@@ -238,6 +227,9 @@
 
                 // フォームデータの取得
                 const menu = document.querySelector('input[name="menu"]:checked').value;
+                const fChoice = document.getElementById('f-choice').value;
+                const sChoice = document.getElementById('s-choice').value;
+                const tChoice = document.getElementById('t-choice').value;
                 const name = document.getElementById('name').value;
                 const furigana = document.getElementById('furigana').value;
                 const email = document.getElementById('email').value;
