@@ -65,26 +65,15 @@ function submitForm(e) {
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data)
-        // サーバーからのレスポンスを確認して適切な処理を行う
-        if (data.success) {
-            liffClose(); // レスポンスが成功を示している場合にLIFFウィンドウを閉じる
-        } else {
-            console.error('サーバーサイド受け取り失敗:', data);
-        }
     })
     .catch((error) => {
         console.error('データ送信失敗:', error);
     });
 
-    liffClose();
 
     // 送信メッセージの内容
     // const messageContent = createFlexMessage(formData);
     // sendMessage(messageContent);
-}
-
-function liffClose() {
-  liff.closeWindow();
 }
 
 // function createFlexMessage(formData) {
