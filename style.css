@@ -46,7 +46,6 @@ h2 {
     font-weight: bold;
     font-size: 14px;
     width: 90%;
-    margin: 20px auto;
     background: #BA9D5A;
     color: #FFF;
     border: 0px;
@@ -58,7 +57,6 @@ h2 {
     font-weight: bold;
     font-size: 14px;
     width: 90%;
-    margin: 20px auto;
     background: #fff;
     color: #000;
     border: #BA9D5A solid 1px;
@@ -88,7 +86,7 @@ footer {
 
 .flow div strong {
     display: inline-block;
-    padding: 8px 12px;
+    padding: 6px 12px;
     background: #f1f1f1;
     color: #FFF;
     border-radius: 50%;
@@ -135,14 +133,26 @@ form {
 }
 .form-q {
 }
+.form-q .req {
+    background: #ff0000;
+}
 .form-a input{
     padding: 8px 10px;
     width: 100%;
     font-size: 16px;
-    border: solid 2px #BA9D5A;
+    border: solid 2px #FFF;
+    border-radius: 10px;
     box-shadow: 0px 5px 5px 0 rgba(0, 0, 0, 0.1);
 }
+.form-a input:focus{
+    outline: none; /* デフォルトのアウトラインを削除 */
+    border: 2px solid #BA9D5A; /* 新しい枠線の色 */
+}
+.form-a input::placeholder {
+    color: rgba(30, 30, 30, 0.3); /* 黒色の半透明 */
+}
 .form-c div{
+    padding: 8px;
     text-align: center;
     background: #BA9D5A;
     color: #FFF;

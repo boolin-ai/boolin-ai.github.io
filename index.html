@@ -189,6 +189,7 @@
                 // formNameを表示し、formMenuを非表示にする
                 firstPage.style.display = "none";
                 formPage.style.display = "block";
+                formMenu.style.display = "flex";
             });
             // フォーム「お客様情報」を表示
             formNameButton.addEventListener("click", function() {
@@ -200,7 +201,7 @@
                 }
                 // formNameを表示し、formMenuを非表示にする
                 formMenu.style.display = "none";
-                formName.style.display = "block";
+                formName.style.display = "flex";
 
                 // activeクラスの設定
                 element1.classList.remove("active"); // 一旦activeクラスを削除
@@ -209,7 +210,7 @@
             // フォーム「施術選択」へ戻る
             backNameBtn.addEventListener("click", function() {
                 // formNameを表示し、formMenuを非表示にする
-                formMenu.style.display = "block";
+                formMenu.style.display = "flex";
                 formName.style.display = "none";
 
                 // activeクラスの設定
@@ -261,7 +262,7 @@
             // フォーム「施術選択」へ戻る
             backMenuBtn.addEventListener("click", function() {
                 // formNameを表示し、formMenuを非表示にする
-                formName.style.display = "block";
+                formName.style.display = "flex";
                 formConfirmation .style.display = "none";
 
                 // activeクラスの設定
