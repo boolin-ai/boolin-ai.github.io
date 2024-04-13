@@ -53,7 +53,7 @@
             <div id="formMenu">
                 <div class="form-item">
                     <div class="form-q">
-                        <label>診療を選択してください</label>
+                        <label>診療を選択してください</label><span class="req">*</span>
                     </div>
                     <div class="form-c">
                         <div>
@@ -77,18 +77,6 @@
                             <label for="menu5">再生医療カウンセリング</label>
                         </div>
                     </div>
-                </div>
-                <div class="form-item">
-                    <div class="form-q"><label for="f-choice">第一希望日</label><span class="req">*</span></div>
-                    <div class="form-a"><input type="text" id="f-choice" name="f-choice" placeholder="5/10 10:00" required></div>
-                </div>
-                <div class="form-item">
-                    <div class="form-q"><label for="s-choice">第二希望日</label><span class="req">*</span></div>
-                    <div class="form-a"><input type="text" id="s-choice" name="s-choice" placeholder="5/10 12:00" required></div>
-                </div>
-                <div class="form-item">
-                    <div class="form-q"><label for="t-choice">第三希望日</label><span class="req">*</span></div>
-                    <div class="form-a"><input type="text" id="t-choice" name="t-choice" placeholder="5/11 12:00" required></div>
                 </div>
                 <button type="button" id="formNameBtn" class="formBtn">お客様情報入力へ</button>
             </div>
@@ -123,6 +111,18 @@
                         <input type="radio" id="genderless" name="gender" value="その他" required>
                         <label for="genderless">その他</label>
                     </div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="f-choice">第一希望日</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="f-choice" name="f-choice" placeholder="5/10 10:00" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="s-choice">第二希望日</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="s-choice" name="s-choice" placeholder="5/10 12:00" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="t-choice">第三希望日</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="t-choice" name="t-choice" placeholder="5/11 12:00" required></div>
                 </div>
                 <button type="button" id="formConfirmationBtn" class="formBtn">確認画面へ</button>
                 <button type="button" id="backNameBtn" class="backBtn">戻る</button>
