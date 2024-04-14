@@ -65,298 +65,297 @@ function submitForm(e) {
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data)
+        送信メッセージの内容
+        const messageContent = createFlexMessage(formData);
+        sendMessage(messageContent);
     })
     .catch((error) => {
         console.error('データ送信失敗:', error);
     });
-
-
-    // 送信メッセージの内容
-    // const messageContent = createFlexMessage(formData);
-    // sendMessage(messageContent);
+   
 }
 
-// function createFlexMessage(formData) {
+function createFlexMessage(formData) {
 
-//     // フォームデータから名前を取得
-//     const menu = formData.get('menu');
-//     const fChoice = formData.get('fChoice'); 
-//     const sChoice = formData.get('sChoice'); 
-//     const tChoice = formData.get('tChoice'); 
-//     const name = formData.get('name'); 
-//     const furigana = formData.get('furigana'); 
-//     const email = formData.get('email'); 
-//     const phone = formData.get('phone'); 
-//     const birthday = formData.get('birthday'); 
-//     const gender = formData.get('gender'); 
+    // フォームデータから名前を取得
+    const menu = formData.get('menu');
+    const fChoice = formData.get('fChoice'); 
+    const sChoice = formData.get('sChoice'); 
+    const tChoice = formData.get('tChoice'); 
+    const name = formData.get('name'); 
+    const furigana = formData.get('furigana'); 
+    const email = formData.get('email'); 
+    const phone = formData.get('phone'); 
+    const birthday = formData.get('birthday'); 
+    const gender = formData.get('gender'); 
 
-//     return {
-//         "type": "bubble",
-//         "body": {
-//           "type": "box",
-//           "layout": "vertical",
-//           "contents": [
-//             {
-//               "type": "text",
-//               "text": "仮予約を受け付けました",
-//               "weight": "bold",
-//               "size": "md",
-//               "color": "#BA9D5A"
-//             },
-//             {
-//               "type": "text",
-//               "text": "返信をしばらくお待ちください",
-//               "size": "xxs",
-//               "offsetTop": "md",
-//               "offsetBottom": "xs"
-//             },
-//             {
-//               "type": "box",
-//               "layout": "vertical",
-//               "margin": "lg",
-//               "spacing": "sm",
-//               "contents": [
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "診療",
-//                       "color": "#F690A8",
-//                       "size": "sm",
-//                       "flex": 2
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": menu,
-//                       "wrap": true,
-//                       "size": "sm",
-//                       "flex": 5
-//                     }
-//                   ]
-//                 },
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "お名前",
-//                       "color": "#F690A8",
-//                       "size": "sm",
-//                       "flex": 2
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": name,
-//                       "wrap": true,
-//                       "size": "sm",
-//                       "flex": 5
-//                     }
-//                   ]
-//                 },
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "フリガナ",
-//                       "color": "#F690A8",
-//                       "size": "sm",
-//                       "flex": 2
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": furigana,
-//                       "wrap": true,
-//                       "size": "sm",
-//                       "flex": 5
-//                     }
-//                   ]
-//                 },
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "メール",
-//                       "color": "#F690A8",
-//                       "size": "sm",
-//                       "flex": 2
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": email,
-//                       "wrap": true,
-//                       "size": "sm",
-//                       "flex": 5
-//                     }
-//                   ]
-//                 },
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "電話番号",
-//                       "color": "#F690A8",
-//                       "size": "sm",
-//                       "flex": 2
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": phone,
-//                       "wrap": true,
-//                       "size": "sm",
-//                       "flex": 5
-//                     }
-//                   ]
-//                 },
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "生年月日",
-//                       "color": "#F690A8",
-//                       "size": "sm",
-//                       "flex": 2
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": birthday,
-//                       "wrap": true,
-//                       "size": "sm",
-//                       "flex": 5
-//                     }
-//                   ],
-//                   "borderWidth": "none"
-//                 },
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "性別",
-//                       "color": "#F690A8",
-//                       "size": "sm",
-//                       "flex": 2
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": gender,
-//                       "wrap": true,
-//                       "size": "sm",
-//                       "flex": 5
-//                     }
-//                   ]
-//                 }
-//               ],
-//               "offsetTop": "md"
-//             },
-//             {
-//               "type": "separator",
-//               "margin": "xl"
-//             },
-//             {
-//               "type": "box",
-//               "layout": "vertical",
-//               "spacing": "sm",
-//               "contents": [
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "第一希望",
-//                       "flex": 2,
-//                       "size": "sm",
-//                       "color": "#BA9D5A",
-//                       "weight": "bold"
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": fChoice,
-//                       "flex": 5,
-//                       "size": "sm",
-//                       "wrap": true
-//                     }
-//                   ]
-//                 },
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "第二希望",
-//                       "color": "#BA9D5A",
-//                       "size": "sm",
-//                       "flex": 2,
-//                       "weight": "bold"
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": sChoice,
-//                       "wrap": true,
-//                       "size": "sm",
-//                       "flex": 5
-//                     }
-//                   ]
-//                 },
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "第三希望",
-//                       "color": "#BA9D5A",
-//                       "size": "sm",
-//                       "flex": 2,
-//                       "weight": "bold"
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": tChoice,
-//                       "wrap": true,
-//                       "size": "sm",
-//                       "flex": 5
-//                     }
-//                   ]
-//                 }
-//               ],
-//               "margin": "md"
-//             }
-//           ]
-//         }
-//     };
-// }
+    return {
+        "type": "bubble",
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "仮予約を受け付けました",
+              "weight": "bold",
+              "size": "md",
+              "color": "#BA9D5A"
+            },
+            {
+              "type": "text",
+              "text": "返信をしばらくお待ちください",
+              "size": "xxs",
+              "offsetTop": "md",
+              "offsetBottom": "xs"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "margin": "lg",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "診療",
+                      "color": "#F690A8",
+                      "size": "sm",
+                      "flex": 2
+                    },
+                    {
+                      "type": "text",
+                      "text": menu,
+                      "wrap": true,
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "お名前",
+                      "color": "#F690A8",
+                      "size": "sm",
+                      "flex": 2
+                    },
+                    {
+                      "type": "text",
+                      "text": name,
+                      "wrap": true,
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "フリガナ",
+                      "color": "#F690A8",
+                      "size": "sm",
+                      "flex": 2
+                    },
+                    {
+                      "type": "text",
+                      "text": furigana,
+                      "wrap": true,
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "メール",
+                      "color": "#F690A8",
+                      "size": "sm",
+                      "flex": 2
+                    },
+                    {
+                      "type": "text",
+                      "text": email,
+                      "wrap": true,
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "電話番号",
+                      "color": "#F690A8",
+                      "size": "sm",
+                      "flex": 2
+                    },
+                    {
+                      "type": "text",
+                      "text": phone,
+                      "wrap": true,
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "生年月日",
+                      "color": "#F690A8",
+                      "size": "sm",
+                      "flex": 2
+                    },
+                    {
+                      "type": "text",
+                      "text": birthday,
+                      "wrap": true,
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ],
+                  "borderWidth": "none"
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "性別",
+                      "color": "#F690A8",
+                      "size": "sm",
+                      "flex": 2
+                    },
+                    {
+                      "type": "text",
+                      "text": gender,
+                      "wrap": true,
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ]
+                }
+              ],
+              "offsetTop": "md"
+            },
+            {
+              "type": "separator",
+              "margin": "xl"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "第一希望",
+                      "flex": 2,
+                      "size": "sm",
+                      "color": "#BA9D5A",
+                      "weight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "text": fChoice,
+                      "flex": 5,
+                      "size": "sm",
+                      "wrap": true
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "第二希望",
+                      "color": "#BA9D5A",
+                      "size": "sm",
+                      "flex": 2,
+                      "weight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "text": sChoice,
+                      "wrap": true,
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "第三希望",
+                      "color": "#BA9D5A",
+                      "size": "sm",
+                      "flex": 2,
+                      "weight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "text": tChoice,
+                      "wrap": true,
+                      "size": "sm",
+                      "flex": 5
+                    }
+                  ]
+                }
+              ],
+              "margin": "md"
+            }
+          ]
+        }
+    };
+}
 
-// function sendMessage(flex) {
-//         liff.sendMessages([{
-//             type: "flex",
-//             altText: "仮予約を受け付けました",
-//             contents: flex
-//         }]).then(() => {
-//             console.log('Flex message sent successfully');
-//             liff.closeWindow();
-//         }).catch((error) => {})
-// }
+function sendMessage(flex) {
+        liff.sendMessages([{
+            type: "flex",
+            altText: "仮予約を受け付けました",
+            contents: flex
+        }]).then(() => {
+            console.log('Flex message sent successfully');
+            liff.closeWindow();
+        }).catch((error) => {})
+}
