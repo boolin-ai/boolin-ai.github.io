@@ -223,8 +223,6 @@
                 const sChoice = document.getElementById('s-choice').value;
                 const tChoice = document.getElementById('t-choice').value;
                 const name = document.getElementById('name').value;
-                const furigana = document.getElementById('furigana').value;
-                const email = document.getElementById('email').value;
                 const phone = document.getElementById('phone').value;
                 const birthday = document.getElementById('birthday').value;
                 const gender = document.querySelector('input[name="gender"]:checked').value;
@@ -234,13 +232,14 @@
 
                 // 確認画面に表示する内容を組み立て
                 confirmationContent.innerHTML = `
-                <p>メニュー選択: <span>${menu}</span></p>
-                <p>お名前: <span>${name}</span></p>
-                <p>フリガナ: <span>${furigana}</span></p>
-                <p>メールアドレス: <span>${email}</span></p>
-                <p>電話番号: <span>${phone}</span></p>
-                <p>生年月日: <span>${birthday}</span></p>
-                <p>性別: <span>${gender}</span></p>
+                <p><span>第一希望日:</span> ${fChoice}</p>
+                <p><span>第二希望日:</span> ${sChoice}</p>
+                <p><span>第三d希望日:</span> ${tChoice}</p>
+                <p><span>メニュー選択:</span> ${menu}</p>
+                <p><span>お名前:</span> ${name}</p>
+                <p><span>電話番号:</span> ${phone}</p>
+                <p><span>生年月日:</span> ${birthday}</p>
+                <p><span>性別:</span> ${gender}</p>
                 `;
             });
             // フォーム「施術選択」へ戻る

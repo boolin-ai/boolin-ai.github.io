@@ -49,6 +49,7 @@ function submitForm(e) {
     formData.append('sChoice', document.getElementById('s-choice').value);
     formData.append('tChoice', document.getElementById('t-choice').value);
 
+
     let object = {};
     formData.forEach((value, key) => object[key] = value);
     let json = JSON.stringify(object);
