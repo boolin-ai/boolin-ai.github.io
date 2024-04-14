@@ -65,7 +65,6 @@ function submitForm(e) {
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data)
-        送信メッセージの内容
         const messageContent = createFlexMessage(formData);
         sendMessage(messageContent);
     })
