@@ -40,16 +40,14 @@ function submitForm(e) {
     const formData = new FormData(); // `form`要素の参照があれば、`new FormData(formElement)`とすることも可能です。
     formData.append('userId', userId);
     formData.append('displayName', displayName);
+    formData.append('name', document.getElementById('name').value);
+    formData.append('phone', document.getElementById('phone').value);
+    formData.append('birthday', document.getElementById('birthday').value);
+    formData.append('gender', document.querySelector('input[name="gender"]:checked').value);
     formData.append('menu', document.querySelector('input[name="menu"]:checked').value);
     formData.append('fChoice', document.getElementById('f-choice').value);
     formData.append('sChoice', document.getElementById('s-choice').value);
     formData.append('tChoice', document.getElementById('t-choice').value);
-    formData.append('name', document.getElementById('name').value);
-    formData.append('furigana', document.getElementById('furigana').value);
-    formData.append('email', document.getElementById('email').value);
-    formData.append('phone', document.getElementById('phone').value);
-    formData.append('birthday', document.getElementById('birthday').value);
-    formData.append('gender', document.querySelector('input[name="gender"]:checked').value);
 
     let object = {};
     formData.forEach((value, key) => object[key] = value);
@@ -65,16 +63,24 @@ function submitForm(e) {
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data)
+        // サーバーからのレスポンスを確認して適切な処理を行う
+        if (data.success) {
+            liffClose(); // レスポンスが成功を示している場合にLIFFウィンドウを閉じる
+        } else {
+            console.error('サーバーサイド受け取り失敗:', data);
+        }
     })
     .catch((error) => {
         console.error('データ送信失敗:', error);
-        liff.closeWindow();
     });
-
 
     // 送信メッセージの内容
     // const messageContent = createFlexMessage(formData);
     // sendMessage(messageContent);
+}
+
+function liffClose() {
+  liff.closeWindow();
 }
 
 // function createFlexMessage(formData) {
@@ -153,48 +159,6 @@ function submitForm(e) {
 //                     {
 //                       "type": "text",
 //                       "text": name,
-//                       "wrap": true,
-//                       "size": "sm",
-//                       "flex": 5
-//                     }
-//                   ]
-//                 },
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "フリガナ",
-//                       "color": "#F690A8",
-//                       "size": "sm",
-//                       "flex": 2
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": furigana,
-//                       "wrap": true,
-//                       "size": "sm",
-//                       "flex": 5
-//                     }
-//                   ]
-//                 },
-//                 {
-//                   "type": "box",
-//                   "layout": "baseline",
-//                   "spacing": "sm",
-//                   "contents": [
-//                     {
-//                       "type": "text",
-//                       "text": "メール",
-//                       "color": "#F690A8",
-//                       "size": "sm",
-//                       "flex": 2
-//                     },
-//                     {
-//                       "type": "text",
-//                       "text": email,
 //                       "wrap": true,
 //                       "size": "sm",
 //                       "flex": 5
