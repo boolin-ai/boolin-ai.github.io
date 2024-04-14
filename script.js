@@ -4,12 +4,6 @@ let displayName = ''; // グローバルスコープでの変数宣言
 document.addEventListener('DOMContentLoaded', function () {
     const liffId = "2000050276-Kjj7lW0L"; // ここにLIFF IDを設定
     initializeLiff(liffId);
-
-    // ボタンがクリックされたときのイベントリスナーを設定
-    const formSubmitBtn = document.getElementById('formSubmitBtn');
-    if (formSubmitBtn) {
-        formSubmitBtn.addEventListener('click', submitForm);
-    }
 });
 
 function initializeLiff(liffId) {
@@ -18,6 +12,7 @@ function initializeLiff(liffId) {
     }).then(() => {
         if (liff.isLoggedIn()) {
             initializeApp();
+            attachFormSubmitHandler(); // フォームの送信ハンドラーを設定
         } else {
             liff.login(); // ユーザーがログインしていない場合はログインを促す
         }
@@ -31,6 +26,11 @@ function initializeApp() {
         userId = profile.userId; // グローバル変数に代入
         displayName = profile.displayName; // グローバル変数に代入
     }).catch(err => console.error(err));
+}
+
+function attachFormSubmitHandler() {
+    const form = document.getElementById('form');
+    form.addEventListener('submit', submitForm);
 }
 
 function submitForm(e) {
@@ -72,12 +72,11 @@ function submitForm(e) {
                 altText: "仮予約を受け付けました",
                 contents: messageContent
             }])
-            .then(() => {
-                console.log('Message sent');
-                liff.closeWindow(); // 送信後にLIFFアプリを閉じる
-            })
-            .catch(error => console.error('Send message failed:', error));
         }
+    })
+    .then(() => {
+        console.log('Message sent');
+        liff.closeWindow();
     })
     .catch((error) => {
         console.error('データ送信失敗:', error);
