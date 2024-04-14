@@ -4,12 +4,6 @@ let displayName = ''; // グローバルスコープでの変数宣言
 document.addEventListener('DOMContentLoaded', function () {
     const liffId = "2000050276-Kjj7lW0L"; // ここにLIFF IDを設定
     initializeLiff(liffId);
-
-    // ボタンがクリックされたときのイベントリスナーを設定
-    const formSubmitBtn = document.getElementById('formSubmitBtn');
-    if (formSubmitBtn) {
-        formSubmitBtn.addEventListener('click', submitForm);
-    }
 });
 
 function initializeLiff(liffId) {
@@ -18,6 +12,7 @@ function initializeLiff(liffId) {
     }).then(() => {
         if (liff.isLoggedIn()) {
             initializeApp();
+            setupFormSubmitButton();
         } else {
             liff.login(); // ユーザーがログインしていない場合はログインを促す
         }
@@ -33,8 +28,17 @@ function initializeApp() {
     }).catch(err => console.error(err));
 }
 
+function setupFormSubmitButton() {
+    // ボタンがクリックされたときのイベントリスナーを設定
+    const formSubmitBtn = document.getElementById('formSubmitBtn');
+    if (formSubmitBtn) {
+        formSubmitBtn.addEventListener('click', submitForm);
+    }
+}
+
 function submitForm(e) {
     e.preventDefault(); // フォームのデフォルト送信を防止
+    showLoading(); //ローディングアニメーション
 
     // フォームデータの収集
     const formData = new FormData(); // `form`要素の参照があれば、`new FormData(formElement)`とすることも可能です。
@@ -69,4 +73,8 @@ function submitForm(e) {
     .catch((error) => {
         console.error('データ送信失敗:', error);
     });
+}
+
+function showLoading() {
+    document.getElementById('loadingOverlay').style.display = 'block';
 }
