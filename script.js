@@ -65,8 +65,19 @@ function submitForm(e) {
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data)
-        const messageContent = createFlexMessage(formData);
-        sendMessage(messageContent);
+        if (data.success) {
+            const messageContent = createFlexMessage(formData);
+            liff.sendMessages([{
+                type: "flex",
+                altText: "仮予約を受け付けました",
+                contents: messageContent
+            }])
+            .then(() => {
+                console.log('Message sent');
+                liff.closeWindow(); // 送信後にLIFFアプリを閉じる
+            })
+            .catch(error => console.error('Send message failed:', error));
+        }
     })
     .catch((error) => {
         console.error('データ送信失敗:', error);
@@ -348,13 +359,13 @@ function createFlexMessage(formData) {
     };
 }
 
-function sendMessage(flex) {
-        liff.sendMessages([{
-            type: "flex",
-            altText: "仮予約を受け付けました",
-            contents: flex
-        }]).then(() => {
-            console.log('Flex message sent successfully');
-            liff.closeWindow();
-        }).catch((error) => {})
-}
+// function sendMessage(flex) {
+//         liff.sendMessages([{
+//             type: "flex",
+//             altText: "仮予約を受け付けました",
+//             contents: flex
+//         }]).then(() => {
+//             console.log('Flex message sent successfully');
+//             liff.closeWindow();
+//         }).catch((error) => {})
+// }
