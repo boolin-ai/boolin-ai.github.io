@@ -82,20 +82,16 @@
             </div>
             <div id="formName">
                 <div class="form-item">
-                    <div class="form-q"><label for="f-choice">第一希望日</label><span class="req">*</span></div>
-                    <div class="form-a"><input type="text" id="f-choice" name="f-choice" placeholder="5/10 10:00" required></div>
-                </div>
-                <div class="form-item">
-                    <div class="form-q"><label for="s-choice">第二希望日</label><span class="req">*</span></div>
-                    <div class="form-a"><input type="text" id="s-choice" name="s-choice" placeholder="5/10 12:00" required></div>
-                </div>
-                <div class="form-item">
-                    <div class="form-q"><label for="t-choice">第三希望日</label><span class="req">*</span></div>
-                    <div class="form-a"><input type="text" id="t-choice" name="t-choice" placeholder="5/11 12:00" required></div>
-                </div>
-                <div class="form-item">
                     <div class="form-q"><label for="name">お名前</label><span class="req">*</span></div>
                     <div class="form-a"><input type="text" id="name" name="name" placeholder="例）田中太郎" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="name">フリガナ</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="furigana" name="furigana" placeholder="例）タナカタロウ" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="email">メールアドレス</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="email" id="email" name="email" placeholder="例）sample@example.com" required></div>
                 </div>
                 <div class="form-item">
                     <div class="form-q"><label for="phone">電話番号</label><span class="req">*</span></div>
@@ -116,6 +112,18 @@
                         <label for="genderless">その他</label>
                     </div>
                 </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="f-choice">第一希望日</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="f-choice" name="f-choice" placeholder="5/10 10:00" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="s-choice">第二希望日</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="s-choice" name="s-choice" placeholder="5/10 12:00" required></div>
+                </div>
+                <div class="form-item">
+                    <div class="form-q"><label for="t-choice">第三希望日</label><span class="req">*</span></div>
+                    <div class="form-a"><input type="text" id="t-choice" name="t-choice" placeholder="5/11 12:00" required></div>
+                </div>
                 <button type="button" id="formConfirmationBtn" class="formBtn">確認画面へ</button>
                 <button type="button" id="backNameBtn" class="backBtn">戻る</button>
             </div>
@@ -125,10 +133,6 @@
                 <button type="button" id="backMenuBtn" class="backBtn">戻る</button>
             </div>
         </form>
-    </div>
-    <!-- ローディングアニメーションとオーバーレイ -->
-    <div id="loadingOverlay" style="display: none;">
-        <div id="loadingSpinner"></div>
     </div>
     <footer>
         <a href="https://wbc-saisei.com/privacy.php" class="policy">
@@ -227,6 +231,8 @@
                 const sChoice = document.getElementById('s-choice').value;
                 const tChoice = document.getElementById('t-choice').value;
                 const name = document.getElementById('name').value;
+                const furigana = document.getElementById('furigana').value;
+                const email = document.getElementById('email').value;
                 const phone = document.getElementById('phone').value;
                 const birthday = document.getElementById('birthday').value;
                 const gender = document.querySelector('input[name="gender"]:checked').value;
@@ -236,14 +242,13 @@
 
                 // 確認画面に表示する内容を組み立て
                 confirmationContent.innerHTML = `
-                <p><span>第一希望日:</span> ${fChoice}</p>
-                <p><span>第二希望日:</span> ${sChoice}</p>
-                <p><span>第三d希望日:</span> ${tChoice}</p>
-                <p><span>メニュー選択:</span> ${menu}</p>
-                <p><span>お名前:</span> ${name}</p>
-                <p><span>電話番号:</span> ${phone}</p>
-                <p><span>生年月日:</span> ${birthday}</p>
-                <p><span>性別:</span> ${gender}</p>
+                <p>メニュー選択: <span>${menu}</span></p>
+                <p>お名前: <span>${name}</span></p>
+                <p>フリガナ: <span>${furigana}</span></p>
+                <p>メールアドレス: <span>${email}</span></p>
+                <p>電話番号: <span>${phone}</span></p>
+                <p>生年月日: <span>${birthday}</span></p>
+                <p>性別: <span>${gender}</span></p>
                 `;
             });
             // フォーム「施術選択」へ戻る
