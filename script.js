@@ -58,7 +58,20 @@ function submitForm(e) {
     formData.append('sChoice', document.getElementById('s-choice').value);
     formData.append('message', document.getElementById('message').value);
 
-    sendMessage();
+    if (liff.isLoggedIn()) {
+        liff.sendMessages([{
+            "type": "flex",
+            "altText": "this is a flex message",
+            "contents": creativeFlex(formData)
+        }]).then(() => {
+            console.log('Message sent');
+            liff.closeWindow(); // メッセージ送信後、LIFFアプリを閉じる
+        }).catch(err => {
+            console.error('Send Message Error:', err);
+        });
+    } else {
+        console.error("User is not logged in.");
+    }
 
     // サーバー送信
     // let object = {};
@@ -84,23 +97,6 @@ function submitForm(e) {
 
 function showLoading() {
     document.getElementById('loadingOverlay').style.display = 'block';
-}
-
-function sendMessage() {
-    if (liff.isLoggedIn()) {
-        liff.sendMessages([{
-            "type": "flex",
-            "altText": "this is a flex message",
-            "contents": creativeFlex(formData)
-        }]).then(() => {
-            console.log('Message sent');
-            liff.closeWindow(); // メッセージ送信後、LIFFアプリを閉じる
-        }).catch(err => {
-            console.error('Send Message Error:', err);
-        });
-    } else {
-        console.error("User is not logged in.");
-    }
 }
 
 function creativeFlex(formData) {
