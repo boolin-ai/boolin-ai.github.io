@@ -2,7 +2,7 @@ let userId = ''; // グローバルスコープでの変数宣言
 let displayName = ''; // グローバルスコープでの変数宣言
 
 document.addEventListener('DOMContentLoaded', function () {
-    const liffId = "2000050276-Kjj7lW0L"; // ここにLIFF IDを設定
+    const liffId = "2000980430-xkw3rOyX"; // ここにLIFF IDを設定
     initializeLiff(liffId);
 });
 
@@ -58,28 +58,281 @@ function submitForm(e) {
     formData.append('sChoice', document.getElementById('s-choice').value);
     formData.append('message', document.getElementById('message').value);
 
+    const flexMessage = creativeFlex(formData);
+    sendMessage(flexMessage);
 
-    let object = {};
-    formData.forEach((value, key) => object[key] = value);
-    let json = JSON.stringify(object);
+    // サーバー送信
+    // let object = {};
+    // formData.forEach((value, key) => object[key] = value);
+    // let json = JSON.stringify(object);
     
-    fetch('https://prima-pr.com/wp-json/myapi/v1/submit/', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: json
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data)
-        liff.closeWindow();
-    })
-    .catch((error) => {
-        console.error('データ送信失敗:', error);
-    });
+    // fetch('https://prima-pr.com/wp-json/myapi/v1/submit/', {
+    //   method: 'POST',
+    //   headers: {
+    //       'Content-Type': 'application/json'
+    //   },
+    //   body: json
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     console.log('Success:', data)
+    //     liff.closeWindow();
+    // })
+    // .catch((error) => {
+    //     console.error('データ送信失敗:', error);
+    // });
 }
 
 function showLoading() {
     document.getElementById('loadingOverlay').style.display = 'block';
+}
+
+function sendMessage(flex) {
+    if (liff.isLoggedIn()) {
+        liff.sendMessages([{
+            "type": "flex",
+            "altText": "this is a flex message",
+            "contents": flex
+        }]).then(() => {
+            console.log('Message sent');
+            liff.closeWindow(); // メッセージ送信後、LIFFアプリを閉じる
+        }).catch(err => {
+            console.error('Send Message Error:', err);
+        });
+    } else {
+        console.error("User is not logged in.");
+    }
+}
+
+function creativeFlex(formData) {
+    // FormDataから値を取得
+    const name = formData.get('name');
+    const phone = formData.get('phone');
+    const birthday = formData.get('birthday');
+    const gender = formData.get('gender');
+    const menu = formData.get('menu');
+    const fChoice = formData.get('fChoice');
+    const sChoice = formData.get('sChoice');
+    const message = formData.get('message');
+
+    return {
+        "type": "bubble",
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": "仮予約を受け付けました",
+                    "weight": "bold",
+                    "size": "md",
+                    "color": "#A4A0A0"
+                },
+                {
+                    "type": "text",
+                    "text": "返信をしばらくお待ちください",
+                    "size": "xxs",
+                    "offsetTop": "md",
+                    "offsetBottom": "xs"
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "lg",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "box",
+                            "layout": "baseline",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "診療",
+                                    "color": "#F690A8",
+                                    "size": "sm",
+                                    "flex": 2
+                                },
+                                {
+                                    "type": "text",
+                                    "text": menu,
+                                    "wrap": true,
+                                    "size": "sm",
+                                    "flex": 5
+                                }
+                            ]
+                        },
+                        {
+                            "type": "box",
+                            "layout": "baseline",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "お名前",
+                                    "color": "#F690A8",
+                                    "size": "sm",
+                                    "flex": 2
+                                },
+                                {
+                                    "type": "text",
+                                    "text": name,
+                                    "wrap": true,
+                                    "size": "sm",
+                                    "flex": 5
+                                }
+                            ]
+                        },
+                        {
+                            "type": "box",
+                            "layout": "baseline",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "電話番号",
+                                    "color": "#F690A8",
+                                    "size": "sm",
+                                    "flex": 2
+                                },
+                                {
+                                    "type": "text",
+                                    "text": phone,
+                                    "wrap": true,
+                                    "size": "sm",
+                                    "flex": 5
+                                }
+                            ]
+                        },
+                        {
+                            "type": "box",
+                            "layout": "baseline",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "生年月日",
+                                    "color": "#F690A8",
+                                    "size": "sm",
+                                    "flex": 2
+                                },
+                                {
+                                    "type": "text",
+                                    "text": birthday,
+                                    "wrap": true,
+                                    "size": "sm",
+                                    "flex": 5
+                                }
+                            ]
+                        },
+                        {
+                            "type": "box",
+                            "layout": "baseline",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "性別",
+                                    "color": "#F690A8",
+                                    "size": "sm",
+                                    "flex": 2
+                                },
+                                {
+                                    "type": "text",
+                                    "text": gender,
+                                    "wrap": true,
+                                    "size": "sm",
+                                    "flex": 5
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "separator",
+                    "margin": "xl"
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "box",
+                            "layout": "baseline",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "第一希望",
+                                    "flex": 2,
+                                    "size": "sm",
+                                    "color": "#A4A0A0",
+                                    "weight": "bold"
+                                },
+                                {
+                                    "type": "text",
+                                    "text": fChoice,
+                                    "flex": 5,
+                                    "size": "sm",
+                                    "wrap": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "box",
+                            "layout": "baseline",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "第二希望",
+                                    "color": "#A4A0A0",
+                                    "size": "sm",
+                                    "flex": 2,
+                                    "weight": "bold"
+                                },
+                                {
+                                    "type": "text",
+                                    "text": sChoice,
+                                    "wrap": true,
+                                    "size": "sm",
+                                    "flex": 5
+                                }
+                            ]
+                        }
+                    ],
+                    "margin": "md"
+                }
+            ]
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+                {
+                    "type": "button",
+                    "style": "link",
+                    "height": "sm",
+                    "action": {
+                        "type": "message",
+                        "label": "キャンセルをする",
+                        "text": "＃キャンセルをする"
+                    }
+                },
+                {
+                    "type": "button",
+                    "style": "link",
+                    "height": "sm",
+                    "action": {
+                        "type": "message",
+                        "label": "診療や日程を変更する",
+                        "text": "＃診療や日程を変更する"
+                    }
+                }
+            ],
+            "flex": 0
+        }
+    };
 }

@@ -1,3 +1,4 @@
+# サーバーサイド（WP仮想サーバー）
 function add_cors_http_header(){
   header("Access-Control-Allow-Origin: https://boolin-ai.github.io/");
   header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
