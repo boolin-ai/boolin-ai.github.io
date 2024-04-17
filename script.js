@@ -58,8 +58,7 @@ function submitForm(e) {
     formData.append('sChoice', document.getElementById('s-choice').value);
     formData.append('message', document.getElementById('message').value);
 
-    const flexMessage = creativeFlex(formData);
-    sendMessage(flexMessage);
+    sendMessage();
 
     // サーバー送信
     // let object = {};
@@ -87,12 +86,12 @@ function showLoading() {
     document.getElementById('loadingOverlay').style.display = 'block';
 }
 
-function sendMessage(flex) {
+function sendMessage() {
     if (liff.isLoggedIn()) {
         liff.sendMessages([{
             "type": "flex",
             "altText": "this is a flex message",
-            "contents": flex
+            "contents": creativeFlex(formData)
         }]).then(() => {
             console.log('Message sent');
             liff.closeWindow(); // メッセージ送信後、LIFFアプリを閉じる
