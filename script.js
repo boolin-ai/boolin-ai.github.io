@@ -305,34 +305,6 @@ function creativeFlex(formData) {
                     "margin": "md"
                 }
             ]
-        },
-        "footer": {
-            "type": "box",
-            "layout": "vertical",
-            "spacing": "sm",
-            "contents": [
-                {
-                    "type": "button",
-                    "style": "link",
-                    "height": "sm",
-                    "action": {
-                        "type": "message",
-                        "label": "キャンセルをする",
-                        "text": "＃キャンセルをする"
-                    }
-                },
-                {
-                    "type": "button",
-                    "style": "link",
-                    "height": "sm",
-                    "action": {
-                        "type": "message",
-                        "label": "診療や日程を変更する",
-                        "text": "＃診療や日程を変更する"
-                    }
-                }
-            ],
-            "flex": 0
         }
     };
 }
