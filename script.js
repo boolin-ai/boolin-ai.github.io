@@ -65,7 +65,6 @@ function submitForm(e) {
             "contents": creativeFlex(formData)
         }]).then(() => {
             console.log('Message sent');
-            liff.closeWindow(); // メッセージ送信後、LIFFアプリを閉じる
         }).catch(err => {
             console.error('Send Message Error:', err);
         });
@@ -74,25 +73,25 @@ function submitForm(e) {
     }
 
     // サーバー送信
-    // let object = {};
-    // formData.forEach((value, key) => object[key] = value);
-    // let json = JSON.stringify(object);
+    let object = {};
+    formData.forEach((value, key) => object[key] = value);
+    let json = JSON.stringify(object);
     
-    // fetch('https://prima-pr.com/wp-json/myapi/v1/submit/', {
-    //   method: 'POST',
-    //   headers: {
-    //       'Content-Type': 'application/json'
-    //   },
-    //   body: json
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     console.log('Success:', data)
-    //     liff.closeWindow();
-    // })
-    // .catch((error) => {
-    //     console.error('データ送信失敗:', error);
-    // });
+    fetch('https://prima-pr.com/wp-json/myapi/v1/submit/', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: json
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data)
+        liff.closeWindow();
+    })
+    .catch((error) => {
+        console.error('データ送信失敗:', error);
+    });
 }
 
 function showLoading() {
