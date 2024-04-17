@@ -61,7 +61,7 @@ function submitForm(e) {
     if (liff.isLoggedIn()) {
         liff.sendMessages([{
             "type": "flex",
-            "altText": "this is a flex message",
+            "altText": "仮予約が完了しました",
             "contents": creativeFlex(formData)
         }]).then(() => {
             console.log('Message sent');
