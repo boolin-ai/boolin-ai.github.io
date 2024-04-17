@@ -46,12 +46,17 @@ function submitForm(e) {
     formData.append('displayName', displayName);
     formData.append('name', document.getElementById('name').value);
     formData.append('phone', document.getElementById('phone').value);
-    formData.append('birthday', document.getElementById('birthday').value);
+    // 生年月日をYYYY-MM-DD形式で整形して追加
+    const year = document.getElementById('year').value;
+    const month = document.getElementById('month').value.padStart(2, '0'); // 月を2桁に整形
+    const day = document.getElementById('day').value.padStart(2, '0'); // 日を2桁に整形
+    const birthday = `${year}-${month}-${day}`;
+    formData.append('birthday', birthday);
     formData.append('gender', document.querySelector('input[name="gender"]:checked').value);
     formData.append('menu', document.querySelector('input[name="menu"]:checked').value);
     formData.append('fChoice', document.getElementById('f-choice').value);
     formData.append('sChoice', document.getElementById('s-choice').value);
-    formData.append('tChoice', document.getElementById('t-choice').value);
+    formData.append('message', document.getElementById('message').value);
 
 
     let object = {};

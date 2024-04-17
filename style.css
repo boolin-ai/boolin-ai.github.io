@@ -8,7 +8,7 @@ body {
     background: #FFF;
 }
 header {
-    background: #BA9D5A;
+    background: #A4A0A0;
     padding: 10px 20px;
 }
 h1 {
@@ -24,7 +24,7 @@ h2 {
     margin: 0 auto;
     font-size: 16px;
     padding-bottom: 10px;
-    border-bottom: #BA9D5A solid 1.8px;
+    border-bottom: #A4A0A0 solid 1.8px;
 }
 #firstPage {
     width:100%;
@@ -47,7 +47,7 @@ h2 {
     font-size: 14px;
     width: 90%;
     margin: 0 auto;
-    background: #BA9D5A;
+    background: #A4A0A0;
     color: #FFF;
     border: 0px;
     padding: 10px 20px;
@@ -61,7 +61,7 @@ h2 {
     margin: 0 auto;
     background: #fff;
     color: #000;
-    border: #BA9D5A solid 1px;
+    border: #A4A0A0 solid 1px;
     padding: 9px 19px;
     border-radius: 30px;
 }
@@ -98,7 +98,7 @@ footer {
     font-size: 11px;
 }
 .flow-item.active {
-    background: #BA9D5A;
+    background: #A4A0A0;
 }
 .flow div:nth-child(1),
 .flow div:nth-child(3),
@@ -126,7 +126,7 @@ footer {
 #formConfirmation {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 form {
     padding: 20px;
@@ -134,10 +134,14 @@ form {
 .form-item {
 
 }
-.form-q {
+label {
+    font-size: 14px;
 }
 .form-q .req {
     color: #ff0000;
+}
+.form-a {
+    margin: 12px 0 0 0;
 }
 .form-a input{
     padding: 8px 10px;
@@ -145,14 +149,41 @@ form {
     font-size: 16px;
     border: solid 2px #FFF;
     border-radius: 10px;
-    box-shadow: 0px 5px 5px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 8px 2px  rgba(0, 0, 0, 0.1);
 }
 .form-a input:focus{
     outline: none; /* デフォルトのアウトラインを削除 */
-    border: 2px solid #BA9D5A; /* 新しい枠線の色 */
+    border-color: #A4A0A0; /* 新しい枠線の色 */
 }
 .form-a input::placeholder {
     color: rgba(30, 30, 30, 0.3); /* 黒色の半透明 */
+}
+.form-a select {
+    margin-right: 8px;
+    font-size: 16px;
+    color: rgba(30, 30, 30, 0.3); /* 黒色の半透明 */
+    padding: 4px 12px;
+    border: solid 2px #FFF;
+    border-radius: 10px;
+    box-shadow: 0px 1px 8px 2px  rgba(0, 0, 0, 0.1);
+}
+.form-a select:focus{
+    outline: none; /* デフォルトのアウトラインを削除 */
+    border-color: #A4A0A0; /* 新しい枠線の色 */
+}
+textarea {
+    margin: 12px 0 0 0;
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    box-shadow: 0px 1px 8px 2px  rgba(0, 0, 0, 0.1);
+    resize: vertical; /* ユーザーによるリサイズを縦方向に限定 */
+    font-size: 16px;
+}
+textarea:focus {
+    border-color: #A4A0A0;;
+    outline: none; /* ブラウザのデフォルトのフォーカススタイルを削除 */
 }
 .form-c div{
     padding: 8px;
@@ -176,7 +207,7 @@ form {
     gap: 10px;
 }
 .confirmation-content span {
-    color: #BA9D5A;
+    color: #A4A0A0;
 }
 
 #loadingOverlay {
@@ -184,26 +215,31 @@ form {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
     background-color: rgba(255, 255, 255, 0.8); /* 白くぼかした背景 */
     z-index: 1000; /* 他の要素より前面に表示 */
 }
-
 #loadingSpinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#loadingSpinner span:nth-child(1){
+    position: relative;
+    display: block;
     border: 4px solid #f3f3f3; /* Light grey */
-    border-top: 4px solid #3498db; /* Blue */
+    border-top: 4px solid #21a2f9; /* Blue */
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
     animation: spin 2s linear infinite;
 }
-
+#loadingSpinner span:nth-child(2){
+    position: absolute;
+    font-size: 0.8rem;
+    color: #21a2f9;
+}
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
