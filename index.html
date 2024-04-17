@@ -240,6 +240,7 @@
 
                 // フォームデータの取得
                 const menu = document.querySelector('input[name="menu"]:checked').value;
+                const message = document.getElementById('message').value;
                 const fChoice = document.getElementById('f-choice').value;
                 const sChoice = document.getElementById('s-choice').value;
                 const name = document.getElementById('name').value;
@@ -254,13 +255,15 @@
 
                 // 確認画面に表示する内容を組み立て
                 confirmationContent.innerHTML = `
-                <p><span>第一希望日:</span> ${fChoice}</p>
-                <p><span>第二希望日:</span> ${sChoice}</p>
-                <p><span>メニュー選択:</span> ${menu}</p>
                 <p><span>お名前:</span> ${name}</p>
                 <p><span>電話番号:</span> ${phone}</p>
                 <p><span>生年月日:</span> ${year}-${month}-${day}</p>
                 <p><span>性別:</span> ${gender}</p>
+                <p><span>メニュー選択:</span> ${menu}</p>
+                <p><span>第一希望日:</span> ${fChoice}</p>
+                <p><span>第二希望日:</span> ${sChoice}</p>
+                <p><span>お悩みや症状</span></p>
+                <p>${message}</p>
                 `;
             });
             // フォーム「施術選択」へ戻る
