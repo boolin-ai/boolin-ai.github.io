@@ -61,7 +61,7 @@ function submitForm(e) {
     if (liff.isLoggedIn()) {
         liff.sendMessages([{
             "type": "text",
-            "text": "#仮予約が完了しました"
+            "text": "#仮予約お申し込み"
         }]).then(() => {
             console.log('Message sent');
         }).catch(err => {
