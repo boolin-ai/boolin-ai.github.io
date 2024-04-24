@@ -1,5 +1,3 @@
-let idToken = ""; // グローバルスコープでの変数宣言
-
 document.addEventListener("DOMContentLoaded", function () {
   const liffId = "2000980430-xkw3rOyX"; // ここにLIFF IDを設定
   initializeLiff(liffId);
@@ -12,7 +10,6 @@ function initializeLiff(liffId) {
     })
     .then(() => {
       if (liff.isLoggedIn()) {
-        initializeApp();
         setupFormSubmitButton();
       } else {
         liff.login(); // ユーザーがログインしていない場合はログインを促す
@@ -21,10 +18,6 @@ function initializeLiff(liffId) {
     .catch((err) => {
       console.error("LIFF初期化に失敗しました", err);
     });
-}
-
-function initializeApp() {
-  liff.getIDToken().catch((err) => console.error(err));
 }
 
 function setupFormSubmitButton() {
@@ -39,6 +32,7 @@ function submitForm(e) {
   e.preventDefault(); // フォームのデフォルト送信を防止
   showLoading(); //ローディングアニメーション
 
+  const idToken = liff.getIDToken(); // IDトークンの取得
   // フォームデータの収集
   const formData = new FormData(); // `form`要素の参照があれば、`new FormData(formElement)`とすることも可能です。
   formData.append("idToken", idToken);
