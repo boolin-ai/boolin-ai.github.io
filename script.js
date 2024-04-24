@@ -49,6 +49,7 @@ function submitForm(e, idToken) {
   e.preventDefault(); // フォームのデフォルト送信を防止
   showLoading(); //ローディングアニメーション
 
+  console.log(idToken);
   // フォームデータの収集
   const formData = new FormData(); // `form`要素の参照があれば、`new FormData(formElement)`とすることも可能です。
   // formData.append("userId", userId);
