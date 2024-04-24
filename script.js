@@ -13,10 +13,9 @@ function initializeLiff(liffId) {
     })
     .then(() => {
       if (liff.isLoggedIn()) {
-        const idToken = liff.getIDToken(); // IDトークンを直接取得
+        const accessToken = liff.getAccessToken(); // IDトークンを直接取得
         initializeApp();
-        setupFormSubmitButton(idToken);
-        console.log(idToken);
+        setupFormSubmitButton(accessToken);
       } else {
         liff.login(); // ユーザーがログインしていない場合はログインを促す
       }
@@ -36,26 +35,26 @@ function initializeApp() {
     .catch((err) => console.error(err));
 }
 
-function setupFormSubmitButton(idToken) {
+function setupFormSubmitButton(accessToken) {
   // ボタンがクリックされたときのイベントリスナーを設定
   const formSubmitBtn = document.getElementById("formSubmitBtn");
   if (formSubmitBtn) {
     formSubmitBtn.addEventListener("click", function (e) {
-      submitForm(e, idToken);
+      submitForm(e, accessToken);
     });
   }
 }
 
-function submitForm(e, idToken) {
+function submitForm(e, accessToken) {
   e.preventDefault(); // フォームのデフォルト送信を防止
   showLoading(); //ローディングアニメーション
 
-  console.log(idToken);
+  console.log(accessToken);
   // フォームデータの収集
   const formData = new FormData(); // `form`要素の参照があれば、`new FormData(formElement)`とすることも可能です。
   // formData.append("userId", userId);
   // formData.append("displayName", displayName);
-  formData.append("idToken", idToken);
+  formData.append("idToken", accessToken);
   formData.append("name", document.getElementById("name").value);
   formData.append("phone", document.getElementById("phone").value);
   // 生年月日をYYYY-MM-DD形式で整形して追加
