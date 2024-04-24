@@ -1,5 +1,4 @@
-let userId = ""; // グローバルスコープでの変数宣言
-let displayName = ""; // グローバルスコープでの変数宣言
+let idToken = ""; // グローバルスコープでの変数宣言
 
 document.addEventListener("DOMContentLoaded", function () {
   const liffId = "2000980430-xkw3rOyX"; // ここにLIFF IDを設定
@@ -25,13 +24,7 @@ function initializeLiff(liffId) {
 }
 
 function initializeApp() {
-  liff
-    .getProfile()
-    .then((profile) => {
-      userId = profile.userId; // グローバル変数に代入
-      displayName = profile.displayName; // グローバル変数に代入
-    })
-    .catch((err) => console.error(err));
+  liff.getIDToken().catch((err) => console.error(err));
 }
 
 function setupFormSubmitButton() {
@@ -48,8 +41,7 @@ function submitForm(e) {
 
   // フォームデータの収集
   const formData = new FormData(); // `form`要素の参照があれば、`new FormData(formElement)`とすることも可能です。
-  formData.append("userId", userId);
-  formData.append("displayName", displayName);
+  formData.append("idToken", idToken);
   formData.append("name", document.getElementById("name").value);
   formData.append("phone", document.getElementById("phone").value);
   // 生年月日をYYYY-MM-DD形式で整形して追加
