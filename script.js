@@ -16,6 +16,7 @@ function initializeLiff(liffId) {
         const idToken = liff.getIDToken(); // IDトークンを直接取得
         initializeApp();
         setupFormSubmitButton(idToken);
+        console.log(idToken);
       } else {
         liff.login(); // ユーザーがログインしていない場合はログインを促す
       }
