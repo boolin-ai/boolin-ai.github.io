@@ -1,3 +1,7 @@
+let userId = ""; // グローバルスコープでの変数宣言
+let displayName = ""; // グローバルスコープでの変数宣言
+let globalIdToken = ""; // グローバル変数でトークンを保存
+
 document.addEventListener("DOMContentLoaded", function () {
   const liffId = "2000980430-xkw3rOyX"; // ここにLIFF IDを設定
   initializeLiff(liffId);
@@ -10,6 +14,7 @@ function initializeLiff(liffId) {
     })
     .then(() => {
       if (liff.isLoggedIn()) {
+        initializeApp();
         setupFormSubmitButton();
       } else {
         liff.login(); // ユーザーがログインしていない場合はログインを促す
@@ -18,6 +23,20 @@ function initializeLiff(liffId) {
     .catch((err) => {
       console.error("LIFF初期化に失敗しました", err);
     });
+}
+
+function initializeApp() {
+  liff
+    .getIdToken()
+    .then((idToken) => {
+      globalIdToken = idToken; // トークンをグローバル変数に保存
+    })
+    .getProfile()
+    .then((profile) => {
+      userId = profile.userId; // グローバル変数に代入
+      displayName = profile.displayName; // グローバル変数に代入
+    })
+    .catch((err) => console.error(err));
 }
 
 function setupFormSubmitButton() {
@@ -32,9 +51,11 @@ function submitForm(e) {
   e.preventDefault(); // フォームのデフォルト送信を防止
   showLoading(); //ローディングアニメーション
 
-  const idToken = liff.getIDToken(); // IDトークンの取得
+  const idToken = globalIdToken;
   // フォームデータの収集
   const formData = new FormData(); // `form`要素の参照があれば、`new FormData(formElement)`とすることも可能です。
+  // formData.append("userId", userId);
+  // formData.append("displayName", displayName);
   formData.append("idToken", idToken);
   formData.append("name", document.getElementById("name").value);
   formData.append("phone", document.getElementById("phone").value);
@@ -99,208 +120,3 @@ function submitForm(e) {
 function showLoading() {
   document.getElementById("loadingOverlay").style.display = "block";
 }
-
-// function creativeFlex(formData) {
-//     // FormDataから値を取得
-//     const name = formData.get('name');
-//     const phone = formData.get('phone');
-//     const birthday = formData.get('birthday');
-//     const gender = formData.get('gender');
-//     const menu = formData.get('menu');
-//     const fChoice = formData.get('fChoice');
-//     const sChoice = formData.get('sChoice');
-//     const message = formData.get('message');
-
-//     return {
-//         "type": "bubble",
-//         "body": {
-//             "type": "box",
-//             "layout": "vertical",
-//             "contents": [
-//                 {
-//                     "type": "text",
-//                     "text": "仮予約を受け付けました",
-//                     "weight": "bold",
-//                     "size": "md",
-//                     "color": "#A4A0A0"
-//                 },
-//                 {
-//                     "type": "text",
-//                     "text": "返信をしばらくお待ちください",
-//                     "size": "xxs",
-//                     "offsetTop": "md",
-//                     "offsetBottom": "xs"
-//                 },
-//                 {
-//                     "type": "box",
-//                     "layout": "vertical",
-//                     "margin": "lg",
-//                     "spacing": "sm",
-//                     "contents": [
-//                         {
-//                             "type": "box",
-//                             "layout": "baseline",
-//                             "spacing": "sm",
-//                             "contents": [
-//                                 {
-//                                     "type": "text",
-//                                     "text": "診療",
-//                                     "color": "#F690A8",
-//                                     "size": "sm",
-//                                     "flex": 2
-//                                 },
-//                                 {
-//                                     "type": "text",
-//                                     "text": menu,
-//                                     "wrap": true,
-//                                     "size": "sm",
-//                                     "flex": 5
-//                                 }
-//                             ]
-//                         },
-//                         {
-//                             "type": "box",
-//                             "layout": "baseline",
-//                             "spacing": "sm",
-//                             "contents": [
-//                                 {
-//                                     "type": "text",
-//                                     "text": "お名前",
-//                                     "color": "#F690A8",
-//                                     "size": "sm",
-//                                     "flex": 2
-//                                 },
-//                                 {
-//                                     "type": "text",
-//                                     "text": name,
-//                                     "wrap": true,
-//                                     "size": "sm",
-//                                     "flex": 5
-//                                 }
-//                             ]
-//                         },
-//                         {
-//                             "type": "box",
-//                             "layout": "baseline",
-//                             "spacing": "sm",
-//                             "contents": [
-//                                 {
-//                                     "type": "text",
-//                                     "text": "電話番号",
-//                                     "color": "#F690A8",
-//                                     "size": "sm",
-//                                     "flex": 2
-//                                 },
-//                                 {
-//                                     "type": "text",
-//                                     "text": phone,
-//                                     "wrap": true,
-//                                     "size": "sm",
-//                                     "flex": 5
-//                                 }
-//                             ]
-//                         },
-//                         {
-//                             "type": "box",
-//                             "layout": "baseline",
-//                             "spacing": "sm",
-//                             "contents": [
-//                                 {
-//                                     "type": "text",
-//                                     "text": "生年月日",
-//                                     "color": "#F690A8",
-//                                     "size": "sm",
-//                                     "flex": 2
-//                                 },
-//                                 {
-//                                     "type": "text",
-//                                     "text": birthday,
-//                                     "wrap": true,
-//                                     "size": "sm",
-//                                     "flex": 5
-//                                 }
-//                             ]
-//                         },
-//                         {
-//                             "type": "box",
-//                             "layout": "baseline",
-//                             "spacing": "sm",
-//                             "contents": [
-//                                 {
-//                                     "type": "text",
-//                                     "text": "性別",
-//                                     "color": "#F690A8",
-//                                     "size": "sm",
-//                                     "flex": 2
-//                                 },
-//                                 {
-//                                     "type": "text",
-//                                     "text": gender,
-//                                     "wrap": true,
-//                                     "size": "sm",
-//                                     "flex": 5
-//                                 }
-//                             ]
-//                         }
-//                     ]
-//                 },
-//                 {
-//                     "type": "separator",
-//                     "margin": "xl"
-//                 },
-//                 {
-//                     "type": "box",
-//                     "layout": "vertical",
-//                     "spacing": "sm",
-//                     "contents": [
-//                         {
-//                             "type": "box",
-//                             "layout": "baseline",
-//                             "spacing": "sm",
-//                             "contents": [
-//                                 {
-//                                     "type": "text",
-//                                     "text": "第一希望",
-//                                     "flex": 2,
-//                                     "size": "sm",
-//                                     "color": "#A4A0A0",
-//                                     "weight": "bold"
-//                                 },
-//                                 {
-//                                     "type": "text",
-//                                     "text": fChoice,
-//                                     "flex": 5,
-//                                     "size": "sm",
-//                                     "wrap": true
-//                                 }
-//                             ]
-//                         },
-//                         {
-//                             "type": "box",
-//                             "layout": "baseline",
-//                             "spacing": "sm",
-//                             "contents": [
-//                                 {
-//                                     "type": "text",
-//                                     "text": "第二希望",
-//                                     "color": "#A4A0A0",
-//                                     "size": "sm",
-//                                     "flex": 2,
-//                                     "weight": "bold"
-//                                 },
-//                                 {
-//                                     "type": "text",
-//                                     "text": sChoice,
-//                                     "wrap": true,
-//                                     "size": "sm",
-//                                     "flex": 5
-//                                 }
-//                             ]
-//                         }
-//                     ],
-//                     "margin": "md"
-//                 }
-//             ]
-//         }
-//     };
-// }
