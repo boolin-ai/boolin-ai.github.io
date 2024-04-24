@@ -27,7 +27,7 @@ function initializeLiff(liffId) {
 
 function initializeApp() {
   liff
-    .getIdToken()
+    .getIDToken()
     .then((idToken) => {
       globalIdToken = idToken; // トークンをグローバル変数に保存
     })
